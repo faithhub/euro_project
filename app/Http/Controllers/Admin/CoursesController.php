@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Department;
+use App\Models\Faculties;
+use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -95,7 +97,24 @@ class CoursesController extends Controller
             $data['title'] = 'Departments';
             $data['sn'] = 1;
             $data['mode'] = 'create';
-            return view('admin.departments.index', $data);
+            return view('admin.courses.index', $data);
+        }
+    }
+
+    public function create_page()
+    {
+        $data['faculties'] = Faculties::orderBy('name', 'ASC')->get();
+        $data['departments'] = Department::orderBy('name', 'ASC')->get();
+        $data['levels'] = Level::orderBy('id', 'ASC')->get();
+        return view('admin.courses.create', $data);
+    }
+
+    public function dept(Request $request){
+        try {
+            $departments = Department::where('faculty_id', $request->id)->orderBy('name', 'ASC')->get();
+            return $departments;
+        } catch (\Throwable $th) {
+            return false;
         }
     }
 }

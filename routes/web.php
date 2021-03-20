@@ -24,7 +24,7 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/about', [App\Http\Controllers\HomeController::class, 'about']);
+Route::get('/level/{dept_id}/{faculty_id}', [App\Http\Controllers\LevelController::class, 'index']);
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact']);
 Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq']);
 
@@ -81,6 +81,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
   Route::match(['get', 'post'], '/departments', [App\Http\Controllers\Admin\DepartmentController::class, 'create'])->name('admin_create_department');
   Route::get('/edit-department/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'edit']);
   Route::get('/delete-department/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'delete']);
+
+  
+  //Courses
+  Route::match(['get', 'post'], '/courses', [App\Http\Controllers\Admin\CoursesController::class, 'create'])->name('admin_create_course');
+  Route::get('/create-course', [App\Http\Controllers\Admin\CoursesController::class, 'create_page']);
+  Route::post('/fetch-dept', [App\Http\Controllers\Admin\CoursesController::class, 'dept']);
+  Route::get('/edit-course/{id}', [App\Http\Controllers\Admin\CoursesController::class, 'edit']);
+  Route::get('/delete-course/{id}', [App\Http\Controllers\Admin\CoursesController::class, 'delete']);
 
   //Teacher
   Route::match(['get', 'post'], '/teachers', [App\Http\Controllers\Admin\TeacherController::class, 'create'])->name('admin_create_teacher');

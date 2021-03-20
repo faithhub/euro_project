@@ -168,7 +168,6 @@
                 <div class="row">
                     <div class="col-md-12 heading-bx left">
                         <h2 class="title-head">Faculties<span></span></h2>
-                        {{-- <p>All Faculties in Federal University of Owerri</p> --}}
                     </div>
                 </div>
                 <div class="row">

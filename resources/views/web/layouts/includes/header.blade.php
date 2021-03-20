@@ -65,42 +65,17 @@
           </div>
           <ul class="nav navbar-nav">
             <li class="{{ request()->is('/*')  ? 'active' : '' }}"><a href="{{ url('/') }}">HOME</a></li>
-							<li class=""><a href="javascript:;">SEET <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="index.html">Dept 1</a></li>
-									<li><a href="index-2.html">Dept 2</a></li>
+            @foreach ($faculties as $faculty)              
+							<li class=""><a href="javascript:;">{{$faculty->code}} <i class="fa fa-chevron-down"></i></a>
+								<ul class="sub-menu">                  
+                  @foreach ($departments as $department)
+                  @if ($faculty->id == $department->faculty_id)                      
+                      <li><a href="{{ url('level/'.$department->id.'/'.$faculty->id) }}">{{$department->name}}</a></li>
+                  @endif
+                  @endforeach
 								</ul>
 							</li>
-							<li class=""><a href="javascript:;">SAAT <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="index.html">Dept 1</a></li>
-									<li><a href="index-2.html">Dept 2</a></li>
-								</ul>
-							</li>
-							<li class=""><a href="javascript:;">SOHT <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="index.html">Dept 1</a></li>
-									<li><a href="index-2.html">Dept 2</a></li>
-								</ul>
-							</li>
-							<li class=""><a href="javascript:;">SICT <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="index.html">Dept 1</a></li>
-									<li><a href="index-2.html">Dept 2</a></li>
-								</ul>
-							</li>
-							<li class=""><a href="javascript:;">SOES <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="index.html">Dept 1</a></li>
-									<li><a href="index-2.html">Dept 2</a></li>
-								</ul>
-							</li>
-							<li class=""><a href="javascript:;">SOPS <i class="fa fa-chevron-down"></i></a>
-								<ul class="sub-menu">
-									<li><a href="index.html">Dept 1</a></li>
-									<li><a href="index-2.html">Dept 2</a></li>
-								</ul>
-							</li>
+            @endforeach
           </ul>
           <div class="nav-social-link">
             <a href="javascript:;"><i class="fa fa-facebook"></i></a>

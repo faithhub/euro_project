@@ -59,9 +59,9 @@
 		                </a>
 		            </li>
 					<li>
-						<a href="{{ url('admin/coures') }}" class="ttr-material-button">
+						<a href="{{ url('admin/courses') }}" class="ttr-material-button">
 							<span class="ttr-icon"><i class="ti-book"></i></span>
-		                	<span class="ttr-label">Coures</span>
+		                	<span class="ttr-label">Courses</span>
 		                </a>
 		            </li>
 					<li>

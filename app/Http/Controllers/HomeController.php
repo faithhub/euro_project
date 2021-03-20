@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\Faculties;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -26,7 +28,9 @@ class HomeController extends Controller
    */
   public function index()
   {
-    return view('web.index');
+    $data['faculties'] = Faculties::orderBy('name', 'ASC')->get();
+    $data['departments'] = Department::orderBy('name', 'ASC')->get();
+    return view('web.index', $data);
   }
   public function about()
   {

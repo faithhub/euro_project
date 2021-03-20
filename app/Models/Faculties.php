@@ -15,4 +15,8 @@ class Faculties extends Model
         $save->code = $data['code'];
         $save->save();
     }
+    public function department()
+    {
+      return $this->belongsTo(Department::class, 'faculty_id');
+    }
 }
