@@ -23,11 +23,11 @@
                     </li>
 
 
-                    <li class="{{ request()->is('admin/add-job-category*') || request()->is('admin/job-category*')  ? 'page-active' : '' }}">
+                    <li class="{{ request()->is('admin/students*') || request()->is('admin/job-category*')  ? 'page-active' : '' }}">
                         <a href="#"><i class="la la-users icon-element"></i> Students <span class="la la-caret-down btn-toggle"></span></a>
                         <ul class="dropdown-menu-item">
-                            <li><a href="{{ url('admin/job-categories') }}"> All Students</a></li>
-                            <li><a href="{{ url('admin/add-job-category') }}"> Add New Student</a></li>
+                            <li><a href="{{ url('admin/students') }}"> All Students</a></li>
+                            <li><a href="{{ url('admin/students') }}"> Add New Student</a></li>
                         </ul>
                     </li>
                     

@@ -27,7 +27,7 @@ class StudentController extends Controller
         $data['title'] = 'Students';
         $data['sn'] = 1;
         $data['students'] = User::where('role', 'Student')->with('classes:id,name')->paginate(15);
-        return view('admin.student.index', $data);
+        return view('admin.students.index', $data);
     }
 
     public function create(Request $request)
@@ -99,7 +99,7 @@ class StudentController extends Controller
             $data['sn'] = 1;
             $data['mode'] = 'create';
             $data['classes'] = Classes::all()->groupBy('class_id');
-            return view('admin.student.create', $data);
+            return view('admin.students.create-bulk', $data);
         }
     }
 
