@@ -1,99 +1,94 @@
+<!-- Menu -->
+<header class="header-area header-desktop">
+  <div class="header-menu-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="menu-full-width">
+            <div class="logo">
+              <a href="#"><img src="{{ asset('web2/images/logo2.png') }}" alt="logo"></a>
+            </div><!-- end logo -->
+            <div class="logo-right-content">
+              <div class="header-action-button d-flex align-items-center">
+                <div class="user-action-wrap">
+                  <div class="notification-item">
+                    <div class="dropdown">
+                      <button class="notification-btn dot-status online-status dropdown-toggle" type="button" id="userDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{Auth::user()->avatar != null ? asset('uploads/profile_pictures/'.Auth::user()->avatar) : asset('web2/images/avatar.png')}}" alt="{{Auth::user()->first_name}}">
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="userDropdownMenu">
+                        <div class="mess-dropdown">
+                          <div class="mess__title d-flex align-items-center">
+                            <div class="image dot-status online-status">
+                              <a href="#">
+                                <img src="{{Auth::user()->avatar != null ? asset('uploads/profile_pictures/'.Auth::user()->avatar) : asset('web2/images/avatar.png')}}" alt="{{Auth::user()->first_name}}">
+                              </a>
+                            </div>
+                            <div class="content">
+                              <h4 class="widget-title font-size-16">
+                                <a href="#">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a>
+                              </h4>
+                              <span class="email">{{Auth::user()->email}}</span>
+                            </div>
+                          </div><!-- end mess__title -->
+                          <div class="mess__body">
+                            <ul class="list-items">
+                              <li class="mb-0">
+                                <a href="{{ url('admin/profile') }}" class="d-block">
+                                  <i class="la la-user"></i> Profile
+                                </a>
+                              </li>
+                              <li class="mb-0">
+                                <a href="{{ url('admin/plans') }}" class="d-block">
+                                  <i class="la la-file-text-o"></i> Plans
+                                </a>
+                              </li>
+                              <li class="mb-0">
+                                <a href="{{ url('admin/all-job') }}" class="d-block">
+                                  <i class="la la-briefcase"></i> All Job
+                                </a>
+                              </li>
+                              <li class="mb-0">
+                                <a href="{{ url('admin/change-password') }}" class="d-block">
+                                  <i class="la la-lock"></i> Change Password
+                                </a>
+                              </li>
+                              <li class="mb-0">
+                                <a href="{{ url('admin/withdrawals') }}" class="d-block">
+                                  <i class="la la-money-bill"></i> Withdrawals
+                                </a>
+                              </li>
+                              <li class="mb-0">
+                                <a href="{{ url('admin/transactions') }}" class="d-block">
+                                  <i class="la la-money"></i> Transactions
+                                </a>
+                              </li>
+                              <li class="mb-0">
+                                <div class="section-block mt-2 mb-2"></div>
+                              </li>
+                              <li class="mb-0">
+                                <a href="{{ route('logout') }}" class="d-block">
+                                  <i class="la la-power-off"></i> Logout
+                                </a>
+                              </li>
+                            </ul>
+                          </div><!-- end mess__body -->
+                        </div><!-- end mess-dropdown -->
+                      </div><!-- end dropdown-menu -->
+                    </div><!-- end dropdown -->
+                  </div>
+                </div>
+              </div>
 
-	<!-- header start -->
-	<header class="ttr-header">
-		<div class="ttr-header-wrapper">
-			<!--sidebar menu toggler start -->
-			<div class="ttr-toggle-sidebar ttr-material-button">
-				<i class="ti-close ttr-open-icon"></i>
-				<i class="ti-menu ttr-close-icon"></i>
-			</div>
-			<!--sidebar menu toggler end -->
-			<!--logo start -->
-			<div class="ttr-logo-box">
-				<div>
-					<a href="{{ url('/') }}" class="ttr-logo">
-						<img class="ttr-logo-mobile" alt="" src="{{ asset('dashboard/assets/images/logo-mobile.png') }}" width="30" height="30">
-						<img class="ttr-logo-desktop" alt="" src="{{ asset('dashboard/assets/images/logo-white.png') }}" width="160" height="27">
-					</a>
-				</div>
-			</div>
-			<!--logo end -->
-			<div class="ttr-header-menu">
-				<!-- header left menu start -->
-				<ul class="ttr-header-navigation">
-					<li>
-						<a href="{{ url('index') }}" class="ttr-material-button ttr-submenu-toggle">HOME</a>
-					</li>
-				</ul>
-				<!-- header left menu end -->
-			</div>
-			<div class="ttr-header-right ttr-with-seperator">
-				<!-- header right menu start -->
-				<ul class="ttr-header-navigation">
-					<li>
-						<a href="#" class="ttr-material-button ttr-submenu-toggle"><span class="ttr-user-avatar">
-							@if (Auth::user()->avatar != null)
-								<img alt="" src="{{ asset('uploads/admin_avatar/'.Auth::user()->avatar) }}" width="32" height="32">								
-							@else
-								<img alt="" src="{{ asset('uploads/avatar_pics.jpg') }}" width="32" height="32">								
-							@endif
-						</span></a>
-						<div class="ttr-header-submenu">
-							<ul>
-								<li><a href="{{ url('admin/profile') }}">My profile</a></li>
-								<li><a href="{{ url('admin/classes') }}">Classses</a></li>
-								<li><a href="{{ url('admin/subjects') }}">Subjects</a></li>
-								<li><a href="{{ url('admin/teachers') }}">Teacher</a></li>
-								<li><a href="{{ url('admin/students') }}">Student</a></li>
-								<li><a href="{{ url('logout') }}">Logout</a></li>
-							</ul>
-						</div>
-					</li>
-					{{-- <li class="ttr-hide-on-mobile">
-						<a href="#" class="ttr-material-button"><i class="ti-layout-grid3-alt"></i></a>
-						<div class="ttr-header-submenu ttr-extra-menu">
-							<a href="#">
-								<i class="fa fa-music"></i>
-								<span>Musics</span>
-							</a>
-							<a href="#">
-								<i class="fa fa-youtube-play"></i>
-								<span>Videos</span>
-							</a>
-							<a href="#">
-								<i class="fa fa-envelope"></i>
-								<span>Emails</span>
-							</a>
-							<a href="#">
-								<i class="fa fa-book"></i>
-								<span>Reports</span>
-							</a>
-							<a href="#">
-								<i class="fa fa-smile-o"></i>
-								<span>Persons</span>
-							</a>
-							<a href="#">
-								<i class="fa fa-picture-o"></i>
-								<span>Pictures</span>
-							</a>
-						</div>
-					</li> --}}
-				</ul>
-				<!-- header right menu end -->
-			</div>
-			<!--header search panel start -->
-			{{-- <div class="ttr-search-bar">
-				<form class="ttr-search-form">
-					<div class="ttr-search-input-wrapper">
-						<input type="text" name="qq" placeholder="search something..." class="ttr-search-input">
-						<button type="submit" name="search" class="ttr-search-submit"><i class="ti-arrow-right"></i></button>
-					</div>
-					<span class="ttr-search-close ttr-search-toggle">
-						<i class="ti-close"></i>
-					</span>
-				</form>
-			</div> --}}
-			<!--header search panel end -->
-		</div>
-	</header>
-	<!-- header end -->
+            </div><!-- end logo-right-content -->
+          </div><!-- end menu-full-width -->
+        </div><!-- end col-lg-12 -->
+      </div><!-- end row -->
+    </div><!-- end container-fluid -->
+  </div><!-- end header-menu-wrapper -->
+  <div class="side-nav-container">
+    <div class="humburger-menu">
+      <div class="humburger-menu-lines side-menu-close"></div><!-- end humburger-menu-lines -->
+    </div><!-- end humburger-menu -->
+  </div><!-- end side-nav-container -->
+</header>

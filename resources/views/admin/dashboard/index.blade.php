@@ -1,237 +1,173 @@
 @extends('admin.layouts.app')
-@section('admin')
-
-	<!--Main container start -->
-	<main class="ttr-wrapper">
-		<div class="container-fluid">
-			<div class="db-breadcrumb">
-				<h4 class="breadcrumb-title">Dashboard</h4>
-				<ul class="db-breadcrumb-list">
-					<li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-					<li>Dashboard</li>
-				</ul>
-			</div>	
-			<!-- Card -->
-			<div class="row">
-				<div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
-					<div class="widget-card widget-bg1">					 
-						<div class="wc-item">
-							<h4 class="wc-title mb-2">
-								Faculties
-							</h4>
-							<span class="wc-stats">
-								<span class="counter">
-									{{$teachers_count}}
-								</span>
-							</span>							
-						</div>				      
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
-					<div class="widget-card widget-bg2">					 
-						<div class="wc-item">
-							<h4 class="wc-title mb-2">
-									Departments
-							</h4>
-							<span class="wc-stats counter">
-								{{$students_count}} 
-							</span>
-						</div>				      
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
-					<div class="widget-card widget-bg5">					 
-						<div class="wc-item">
-							<h4 class="wc-title mb-2">
-								Lecturers 
-							</h4>
-							<span class="wc-stats counter">
-								{{$classes_count}} 
-							</span>
-						</div>				      
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 col-xl-3 col-sm-6 col-12">
-					<div class="widget-card widget-bg4">					 
-						<div class="wc-item">
-							<h4 class="wc-title mb-2">
-								Students 
-							</h4>
-							<span class="wc-stats counter">
-								{{$subjects_count}} 
-							</span>
-						</div>				      
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-6 m-b30">
-					<div class="widget-box">
-						<div class="widget-inner">							
-							<div class="new-user-list">
-								<div class="wc-title">
-									<h4>Last Five Teachers</h4>
-								</div>
-								<ul>									
-									@foreach ($teachers as $teacher)
-										<li>
-											@if ($teacher->avatar != null)
-												<span class="new-users-pic">
-													<img src="{{ asset('uploads/teacher_avatar/'.$teacher->avatar)}}" alt="{{$teacher->surname}} {{$teacher->last_name}}"/>
-												</span>												
-											@else
-												<span class="new-users-pic">
-													<img src="uploads/avatar_pics.jpg" alt=""/>
-												</span>												
-											@endif
-											<span class="new-users-text">
-												<a href="#" class="new-users-name">{{$teacher->surname}} {{$teacher->last_name}}</a>
-												<span class="new-users-info">ID: {{$teacher->email}}</span><br>
-												<span class="new-users-info">Registered: {{ date('D, M j, Y \a\t g:ia', strtotime($teacher->created_at))}}</span>
-											</span>
-											<span class="new-users-btn">
-												{{-- <a href="#" class="btn button-sm outline">Follow</a> --}}
-											</span>
-										</li>										
-									@endforeach
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-6 m-b30">
-					<div class="widget-box">
-						<div class="wc-title">
-							<h4>Welcome {{Auth::user()->surname}} {{Auth::user()->last_name}}</h4>
-						</div>
-						<div class="widget-inner">
-							<div class="card-courses-list bookmarks-bx">
-								<div class="card-courses-media">
-									@if (Auth::user()->avatar == null)										
-										<img src="{{ asset('uploads/avatar_pics.jpg') }}" alt="">
-									@else		
-										<img src="{{ asset('uploads/teacher_avatar/'.Auth::user()->avatar) }}" alt="{{Auth::user()->surname}} {{Auth::user()->last_name}}">										
-									@endif
-								</div>
-								<div class="card-courses-full-dec">
-									<div class="card-courses-title">
-										<h4 class="m-b5">{{Auth::user()->surname}} {{Auth::user()->last_name}}</h4>
-									</div>
-									<div class="card-courses-list-bx">
-										<ul class="card-courses-view">
-											<li class="card-courses-categories">
-												<h6>Role</h6>
-												<h5>{{Auth::user()->role}}</h5>
-											</li>
-											<!-- <li class="card-courses-categories">
-												<h6>Teacher ID</h6>
-												<h5>{{Auth::user()->email}}</h5>
-											</li> -->
-										</ul>
-									</div>
-									<div class="row card-courses-dec">
-										{{-- <div class="col-md-12">
-											<p>
-												@foreach ($subjects as $subject)
-													{{$subject->name}}
-												@endforeach
-											</p>	
-										</div> --}}
-										<div class="col-md-12">
-											<a href="{{ url('teacher/profile') }}" class="btn radius-xl">Edit Profile</a>
-										</div>
-									</div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-lg-6 m-b30">
-					<div class="widget-box">
-						<div class="widget-inner">
-							<div class="orders-list">								
-								<div class="wc-title">
-									<h4>Last Five Classes</h4>
-								</div>
-								<ul>
-									@foreach ($classes as $class)<li>
-										<span class="orders-title">
-											<a href="#" class="orders-title-name">
-												{{$sn++}}. {{$class[0]['name']}}
-											</a>
-											<span class="orders-info">Created At | 
-												{{ date('D, M j, Y \a\t g:ia', strtotime($class[0]['created_at']))}}</span>
-										</span>
-									</li>										
-									@endforeach
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 m-b30">
-					<div class="widget-box">
-						<div class="widget-inner">
-							<div class="orders-list">								
-								<div class="wc-title">
-									<h4>Last Five Subjects</h4>
-								</div>
-								<ul>
-									@foreach ($subjects as $subject)<li>
-										<span class="orders-title">
-											<a href="#" class="orders-title-name">
-												{{$sn++}}. {{$subject->name}}
-											</a>
-											<span class="orders-info">Created At | 
-												{{ date('D, M j, Y \a\t g:ia', strtotime($subject->created_at))}}</span>
-										</span>
-									</li>										
-									@endforeach
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 m-b30">
-					<div class="widget-box">
-						<div class="widget-inner">							
-							<div class="new-user-list">
-								<div class="wc-title">
-									<h4>Last Five Students</h4>
-								</div>
-								<ul>									
-									@foreach ($students as $student)
-										<li>
-											@if ($student->avatar != null)
-												<span class="new-users-pic">
-													<img src="{{ asset('uploads/student_avatar/'.$student->avatar)}}" alt="{{$student->surname}} {{$student->last_name}}"/>
-												</span>												
-											@else
-												<span class="new-users-pic">
-													<img src="uploads/avatar_pics.jpg" alt=""/>
-												</span>												
-											@endif
-											<span class="new-users-text">
-												<a href="#" class="new-users-name">{{$student->surname}} {{$student->last_name}}</a>
-												<span class="new-users-info">ID: {{$student->email}}</span><br>
-												<span class="new-users-info">Registered: {{ date('D, M j, Y \a\t g:ia', strtotime($student->created_at))}}</span>
-											</span>
-											<span class="new-users-btn">
-												{{-- <a href="#" class="btn button-sm outline">Follow</a> --}}
-											</span>
-										</li>										
-									@endforeach
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
+@section('admin')    
+<div class="row">
+    <div class="col-lg-12">
+        <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
+            <div class="section-heading">
+                <h2 class="sec__title line-height-45">Welcome, Admin!</h2>
+            </div><!-- end section-heading -->
+            <ul class="list-items d-flex align-items-center">
+                <li class="active__list-item"><a href="#">Home</a></li>
+                <li class="active__list-item">Employers</li>
+                <li>Dashboard</li>
+            </ul>
+        </div><!-- end breadcrumb-content -->
+    </div><!-- end col-lg-12 -->
+</div><!-- end row -->
+<div class="row mt-5">
+    <div class="col-lg-3 column-lg-6 column-md-6">
+        <div class="overview-item">
+            <div class="icon-box bg-1 mb-0 d-flex align-items-center">
+                <div class="icon-element flex-shrink-0">
+                    <i class="la la-user"></i>
+                </div><!-- end icon-element-->
+                <div class="info-content">
+                    <span class="info__count">
+                        {{$lecturers}}
+                    </span>
+                    <h4 class="info__title font-size-16 mt-2">Lecturers</h4>
+                </div><!-- end info-content -->
+            </div>
+        </div>
+    </div><!-- end col-lg-3 -->
+    <div class="col-lg-3 column-lg-6 column-md-6">
+        <div class="overview-item">
+            <div class="icon-box bg-2 mb-0 d-flex align-items-center">
+                <div class="icon-element flex-shrink-0">
+                    <i class="la la-users"></i>
+                </div><!-- end icon-element-->
+                <div class="info-content">
+                    <span class="info__count">
+                        {{$students}}
+                    </span>
+                    <h4 class="info__title font-size-16 mt-2">Students</h4>
+                </div><!-- end info-content -->
+            </div>
+        </div>
+    </div><!-- end col-lg-3 -->
+    <div class="col-lg-3 column-lg-6 column-md-6">
+        <div class="overview-item">
+            <div class="icon-box bg-3 mb-0 d-flex align-items-center">
+                <div class="icon-element flex-shrink-0">
+                    <i class="la la-book"></i>
+                </div><!-- end icon-element-->
+                <div class="info-content">
+                    <span class="info__count"></span>
+                    <h4 class="info__title font-size-16 mt-2">Faculty</h4>
+                </div><!-- end info-content -->
+            </div>
+        </div>
+    </div><!-- end col-lg-3 -->
+    <div class="col-lg-3 column-lg-6 column-md-6">
+        <div class="overview-item">
+            <div class="icon-box bg-4 mb-0 d-flex align-items-center">
+                <div class="icon-element flex-shrink-0">
+                    <i class="la la-book"></i>
+                </div><!-- end icon-element-->
+                <div class="info-content">
+                    <span class="info__count"></span>
+                    <h4 class="info__title font-size-16 mt-2">Departments</h4>
+                </div><!-- end info-content -->
+            </div>
+        </div>
+    </div><!-- end col-lg-3 -->
+    <div class="col-lg-3 column-lg-6 column-md-6">
+        <div class="overview-item">
+            <div class="icon-box bg-5 mb-0 d-flex align-items-center">
+                <div class="icon-element flex-shrink-0">
+                    <i class="la la-book"></i>
+                </div><!-- end icon-element-->
+                <div class="info-content">
+                    <span class="info__count"></span>
+                    <h4 class="info__title font-size-16 mt-2">Courses</h4>
+                </div><!-- end info-content -->
+            </div>
+        </div>
+    </div><!-- end col-lg-3 -->    
+    <div class="col-lg-3 column-lg-6 column-md-6">
+        <div class="overview-item">
+            <div class="icon-box bg-6 mb-0 d-flex align-items-center">
+                <div class="icon-element flex-shrink-0">
+                    <i class="la la-book"></i>
+                </div><!-- end icon-element-->
+                <div class="info-content">
+                    <span class="info__count"></span>
+                    <h4 class="info__title font-size-16 mt-2">Assignments</h4>
+                </div><!-- end info-content -->
+            </div>
+        </div>
+    </div><!-- end col-lg-3 -->
+</div><!-- end row -->
+<div class="row mt-2">
+    <div class="col-12"> 
+        <div class="billing-form-item">
+            <div class="billing-title-wrap">
+                <h3 class="widget-title pb-0">Faculties</h3>
+                <div class="title-shape margin-top-10px"></div>
+            </div><!-- billing-title-wrap -->       
+            <div class="billing-content pb-0">
+                <div class="manage-faculty-wrap">
+                    <div class="table-responsive">                    
+                        @isset($faculties)                                	
+                            @if ($faculties->isEmpty())
+                            <div class="text-center">									
+                                <h4>No Faculty yet</h4>
+                            </div>								
+                            @else
+                                <table class="table table-striped" id="" width="100%">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th>Faculty Name</th>
+                                            <th>Faculty Code</th>
+                                            <th>Created On</th>
+                                            <th class="">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($faculties as $faculty)                                
+                                        <tr>
+                                            <td>{{$sn++}}</td>
+                                            <td class="text-capitalize">
+                                                <div class="manage-candidate-wrap">
+                                                    <h2 class="widget-title pb-0 font-size-15"><b><a class="text-success" href="{{ url('admin/view-faculty', $faculty->id) }}">{{ $faculty->name }}</a></b></h2>
+                                                </div><!-- end manage-candidate-wrap -->
+                                            </td>
+                                            <td>                                    
+                                                <div class="manage-candidate-wrap">
+                                                    <h2 class="widget-title pb-0 font-size-15 text-secondary">
+                                                        <b>{{$faculty->code}}</b>
+                                                    </h2>
+                                                </div><!-- end manage-candidate-wrap -->
+                                            </td>
+                                            <td>                                    
+                                                <div class="manage-candidate-wrap">
+                                                    <h2 class="widget-title pb-0 font-size-15">
+                                                        {{  date('D, M j, Y', strtotime($faculty->created_at))}}
+                                                    </h2>
+                                                </div><!-- end manage-candidate-wrap -->
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="manage-candidate-wrap">
+                                                    <div class="bread-action pt-0">
+                                                        <ul class="info-list">
+                                                            <li class="d-inline-block"><a href="{{ url('admin/view-faculty', $faculty->id) }}" ><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
+                                                            <li class="d-inline-block"><a href="{{ url('admin/edit-faculty', $faculty->id) }}" ><i class="la la-pencil" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
+                                                            <li class="d-inline-block"><a href="{{ url('admin/delete-faculty', $faculty->id) }}" onclick="return confirm('Are you sure you want to delete this Faculty?')" ><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="View"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+                        @endisset
+                    </div>
+                </div>
+            </div><!-- end billing-content -->
+        </div>
+    </div>
+</div><!-- end row -->
 @endsection

@@ -12,8 +12,8 @@
 	        {!! session('status') !!}
 	        <a href="#" style="float:right;" class="alert-close" data-dismiss="alert">&times;</a>
 	    </div>
-	@endif
-
+	@endif --}}
+{{-- 
 	@if (session('warning'))
 	    <div class="alert alert-warning font-weight-700">
 	        {{ session('warning') }}

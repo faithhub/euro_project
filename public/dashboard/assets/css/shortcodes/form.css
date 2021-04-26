@@ -5,20 +5,20 @@
 .panel-head ing,
 .dropdown-menu,
 .panel-group .panel,
-.nav-tabs > li > a,
+.nav-tabs>li>a,
 .modal-content,
 .navbar-toggler,
-.nav-pills > li > a,
-.pager li > a,
-.pager li > span,
+.nav-pills>li>a,
+.pager li>a,
+.pager li>span,
 .well,
 .alert,
 .list-group-item:first-child,
 .list-group-item:last-child,
 .input-group-addon,
-.btn-group-divides > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle),
-.btn-group-divides > .btn:last-child:not(:first-child),
-.btn-group > .dropdown-toggle:not(:first-child),
+.btn-group-divides>.btn:not(:first-child):not(:last-child):not(.dropdown-toggle),
+.btn-group-divides>.btn:last-child:not(:first-child),
+.btn-group>.dropdown-toggle:not(:first-child),
 .ttr-booking-form .ttr-extra-services li .feature-box-lg,
 .ttr-booking-form .ttr-extra-services li.active .feature-box-lg:after,
 .widget_tag_cloud a,
@@ -43,54 +43,72 @@ a,
 .feature-box-xs,
 .navbar-toggler,
 .menu-logo,
-.menu-links .nav > li > a,
-.secondary-menu{
+.menu-links .nav>li>a,
+.secondary-menu {
     -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -ms-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
     transition: all 0.2s linear;
 }
+
+
 /*== >float-clearfix ==*/
+
 .clearfix:after,
 .clearfix:before {
     content: "";
     display: table;
 }
+
 .clearfix:after {
     clear: both;
 }
+
+
 /*error for select box*/
-.has-error .bootstrap-select .dropdown-toggle,
+
+
+/* .has-error .bootstrap-select .dropdown-toggle,
 .has-error .bootstrap-select .dropdown-toggle:hover,
 .has-error .bootstrap-select .dropdown-toggle:focus {
     border-color: #a94442 !important;
 }
+
+
 /*succes for select box*/
-.has-success .bootstrap-select .dropdown-toggle,
+
+
+/* .has-success .bootstrap-select .dropdown-toggle,
 .has-success .bootstrap-select .dropdown-toggle:hover,
 .has-success .bootstrap-select .dropdown-toggle:focus {
     border-color: #3c763d !important;
+} */
+
+*/ button {
+    outline: none !important;
+    cursor: pointer;
 }
-button{
-	outline:none !important;
-	cursor:pointer;
-}
+
 label {
     font-weight: 600;
     margin-bottom: 10px;
 }
+
 .panel-default,
-.panel-default > .panel-heading {
+.panel-default>.panel-heading {
     border-color: #e7ecf1;
     color: inherit;
 }
-.panel-default > .panel-heading + .panel-collapse > .panel-body {
+
+.panel-default>.panel-heading+.panel-collapse>.panel-body {
     border-top-color: #e7ecf1;
 }
+
 .form-group {
     margin-bottom: 25px;
 }
+
 .form-control {
     border-color: #e1e6eb;
     box-shadow: none;
@@ -99,53 +117,70 @@ label {
     line-height: 20px;
     padding: 9px 12px;
 }
+
 textarea.form-control {
-	height:120px;
+    height: 120px;
 }
+
 .form-control:focus {
     border-color: #e1e1e1;
     outline: 0;
 }
+
 .form-control:focus,
 .has-error .form-control:focus {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+
 .form-control.kv-fileinput-caption {
     height: 39px;
 }
+
 .form-group.form-inline .radio,
 .form-group.form-inline .checkbox {
     margin-right: 15px;
 }
+
+
 /*input group*/
+
 .input-group {
     width: 100%;
 }
+
 .input-group .form-control,
 .input-group-addon,
 .input-group-btn {
     display: table-cell;
 }
+
 .input-group-addon {
     background: #fff;
     border-color: #e1e1e1;
     padding: 6px 14px;
     font-size: 16px;
 }
+
 .input-group-addon.font-size-20 {
     font-size: 20px;
 }
+
 .input-group-addon.fixed-w {
     text-align: center;
     padding: 6px 0;
     width: 40px;
 }
+
 .input-group-addon.v-align-t {
     line-height: 30px;
 }
+
+
 /*select box*/
-.dropdown-menu {
+
+
+/* .dropdown-menu {
     font-size: 13px;
 }
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
@@ -220,8 +255,11 @@ textarea.form-control {
 }
 .bootstrap-select .dropdown-menu > li > a:hover {
 	background-color:#f2f2f4;
-}
+} */
+
+
 /*touchspin input type number*/
+
 .bootstrap-touchspin .input-group-btn-vertical {
     position: relative;
     white-space: nowrap;
@@ -229,7 +267,8 @@ textarea.form-control {
     vertical-align: middle;
     display: table-cell;
 }
-.bootstrap-touchspin .input-group-btn-vertical > .btn {
+
+.bootstrap-touchspin .input-group-btn-vertical>.btn {
     display: block;
     float: none;
     width: 100%;
@@ -242,15 +281,18 @@ textarea.form-control {
     border-color: #e1e1e1;
     background: #FFF;
 }
+
 .bootstrap-touchspin .input-group-btn-vertical .bootstrap-touchspin-up {
     border-radius: 0;
     border-top-right-radius: 0;
 }
+
 .bootstrap-touchspin .input-group-btn-vertical .bootstrap-touchspin-down {
     margin-top: -2px;
     border-radius: 0;
     border-bottom-right-radius: 0;
 }
+
 .bootstrap-touchspin .input-group-btn-vertical i {
     position: absolute;
     top: 4px;
@@ -259,21 +301,27 @@ textarea.form-control {
     font-weight: normal;
     color: #9fa0a1;
 }
+
+
 /*rating star*/
+
 .input-rating input[type=radio] {
     display: none;
 }
-.input-rating input[type=radio] + label {
+
+.input-rating input[type=radio]+label {
     display: inline-block;
     margin-left: -4px;
     padding-left: 0px !important;
     padding-right: 0px;
     width: 24px;
 }
-.input-rating input[type=radio] + label:first-of-type {
+
+.input-rating input[type=radio]+label:first-of-type {
     margin-left: 0px;
 }
-.input-rating input[type=radio] + label:before {
+
+.input-rating input[type=radio]+label:before {
     background-color: transparent;
     border: none;
     color: #ffd925;
@@ -291,33 +339,42 @@ textarea.form-control {
     transition: none;
     width: 14px;
 }
-.input-rating input[type=radio]:checked + label:before,
-.input-rating input[type=radio] + label.marked:before,
-.input-rating input[type=radio] + label.filled:before,
-.input-rating input[type=radio] + label.hovered.filled:before {
+
+.input-rating input[type=radio]:checked+label:before,
+.input-rating input[type=radio]+label.marked:before,
+.input-rating input[type=radio]+label.filled:before,
+.input-rating input[type=radio]+label.hovered.filled:before {
     content: "\f005";
 }
-.input-rating input[type=radio] + label.hovered:before {
+
+.input-rating input[type=radio]+label.hovered:before {
     content: "\f006";
 }
+
+
 /*simple rating list*/
 
 .rating-bx {
     color: #ffc300;
     font-size: 14px;
 }
+
 .rating-bx i {
     margin: 0 2px;
 }
+
 .rating-container .rating-stars::before {
     text-shadow: none;
 }
+
 .rating-container {
     color: #c8c8c8;
 }
+
 .rating-container .rating-stars {
     color: #3396d1;
 }
+
 blockquote {
     padding: 16px 20px 16px 80px;
     font-size: 18px;
@@ -331,12 +388,14 @@ blockquote {
     clear: both;
     border-left: 4px solid #EFBB20;
 }
+
 blockquote p {
     font-size: 18px;
     color: #555555;
     line-height: 30px;
     margin-bottom: 0px;
 }
+
 blockquote:before {
     content: '\f10d';
     font-family: "FontAwesome";

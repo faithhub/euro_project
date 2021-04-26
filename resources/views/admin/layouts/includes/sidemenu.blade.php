@@ -1,4 +1,4 @@
-{{-- 
+
     <div class="dashboard-sidebar">
         <div class="dashboard-nav-trigger">
            <div class="dashboard-nav-trigger-btn">
@@ -11,93 +11,68 @@
             </div><!-- end humburger-menu -->
             <div class="side-menu-wrap">
                 <ul class="side-menu-ul">
-                    <li class="{{ request()->is('user*')  ? 'page-active' : '' }}" ><a href="{{ url('user') }}"><i class="la la-dashboard icon-element"></i> Dashboard</a></li>
-                    <li><a href="employer-dashboard-message.html"><i class="la la-envelope icon-element"></i> Messages <span class="badge badge-info radius-rounded p-1">3</span></a></li>
-                    <li><a href="employer-dashboard-bookmark.html"><i class="la la-bookmark icon-element"></i> Courses</a></li>
-                    <li><a href="employer-dashboard-bookmark.html"><i class="la la-bookmark icon-element"></i> My Courses <span class="badge badge-info radius-rounded p-1">10</span></a></li>
-                    <li><a href="employer-transactions.html"><i class="la la-money-bill icon-element"></i>Payment History</a></li>
-                    <li><a href="employer-job-alert.html"><i class="la la-book icon-element"></i>E-Book</a></li>
-                    <li class="{{ request()->is('profile*')  ? 'page-active' : '' }}"><a href="{{ url('user/profile') }}"><i class="la la-user icon-element"></i> View Profile</a></li>
-                    <li class="{{ request()->is('change-password*')  ? 'page-active' : '' }}"><a href="{{ url('user/change-password') }}"><i class="la la-lock icon-element"></i> Change Password</a></li>
+                    <li class="{{ request()->is('admin')  ? 'page-active' : '' }}" ><a href="{{ url('admin') }}"><i class="la la-dashboard icon-element"></i> Dashboard</a></li>
+
+
+                    <li class="{{ request()->is('admin/add-job-category*') || request()->is('admin/job-category*')  ? 'page-active' : '' }}">
+                        <a href="#"><i class="la la-user icon-element"></i> Lecturers <span class="la la-caret-down btn-toggle"></span></a>
+                        <ul class="dropdown-menu-item">
+                            <li><a href="{{ url('admin/job-categories') }}"> All Lecturers</a></li>
+                            <li><a href="{{ url('admin/add-job-category') }}"> Add New Lecturer</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="{{ request()->is('admin/add-job-category*') || request()->is('admin/job-category*')  ? 'page-active' : '' }}">
+                        <a href="#"><i class="la la-users icon-element"></i> Students <span class="la la-caret-down btn-toggle"></span></a>
+                        <ul class="dropdown-menu-item">
+                            <li><a href="{{ url('admin/job-categories') }}"> All Students</a></li>
+                            <li><a href="{{ url('admin/add-job-category') }}"> Add New Student</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="{{ request()->is('admin/faculties*') || request()->is('admin/view-faculty*') || request()->is('admin/edit-faculty*') || request()->is('admin/create-faculty')  ? 'page-active' : '' }}">
+                        <a href="#"><i class="la la-book icon-element"></i> Faculties <span class="la la-caret-down btn-toggle"></span></a>
+                        <ul class="dropdown-menu-item">
+                            <li><a href="{{ url('admin/faculties') }}"> All Faculties</a></li>
+                            <li><a href="{{ url('admin/create-faculty') }}"> Add New Faculty</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="{{ request()->is('admin/departments') || request()->is('admin/create-department') || request()->is('admin/edit-department*') || request()->is('admin/view-dept-level*') || request()->is('admin/view-department-level*') || request()->is('admin/edit-department*')  ? 'page-active' : '' }}">
+                        <a href="#"><i class="la la-book icon-element"></i> Departments <span class="la la-caret-down btn-toggle"></span></a>
+                        <ul class="dropdown-menu-item">
+                            <li><a href="{{ url('admin/departments') }}"> All Departments</a></li>
+                            <li><a href="{{ url('admin/create-department') }}"> Add New Department</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="{{ request()->is('admin/course*') || request()->is('admin/create-course') || request()->is('admin/edit-course*') || request()->is('admin/view-course*')  ? 'page-active' : '' }}">
+                        <a href="#"><i class="la la-book icon-element"></i> Courses <span class="la la-caret-down btn-toggle"></span></a>
+                        <ul class="dropdown-menu-item">
+                            <li><a href="{{ url('admin/courses') }}"> All Courses</a></li>
+                            <li><a href="{{ url('admin/create-course') }}"> Add New Course</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="{{ request()->is('admin/add-job-category*') || request()->is('admin/job-category*')  ? 'page-active' : '' }}">
+                        <a href="#"><i class="la la-book icon-element"></i> Assignments <span class="la la-caret-down btn-toggle"></span></a>
+                        <ul class="dropdown-menu-item">
+                            <li><a href="{{ url('admin/job-categories') }}"> All Assignments</a></li>
+                            <li><a href="{{ url('admin/add-job-category') }}"> Add New Assignment</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="{{ request()->is('admin/profile*') || request()->is('admin/change-password*')  ? 'page-active' : '' }}">
+                        <a href="#"><i class="la la-gear icon-element"></i> Settings <span class="la la-caret-down btn-toggle"></span></a>
+                        <ul class="dropdown-menu-item">
+                            <li><a href="{{ url('admin/profile') }}">Edit Profile</a></li>
+                            <li><a href="{{ url('admin/change-password') }}">Change Password</a></li>
+                        </ul>
+                    </li>
+
                     <li><a href="{{ url('logout') }}"><i class="la la-power-off icon-element"></i> Logout</a></li>
                 </ul>
             </div><!-- end side-menu-wrap -->
         </div>
     </div><!-- end dashboard-sidebar -->
-     --}}
-	<!-- Left sidebar menu start -->
-	<div class="ttr-sidebar">
-		<div class="ttr-sidebar-wrapper content-scroll">
-			<!-- side menu logo start -->
-			<div class="ttr-sidebar-logo">
-				<a href="#">
-					<img alt="" src="{{ asset('dashboard/assets/images/logo.png') }}" width="122" height="27"></a>
-				<div class="ttr-sidebar-toggle-button">
-					<i class="ti-arrow-left"></i>
-				</div>
-			</div>
-			<!-- side menu logo end -->
-			<!-- sidebar menu start -->
-			<nav class="ttr-sidebar-navi">
-				<ul>
-					<li>
-						<a href="{{ url('/admin') }}" class="ttr-material-button active">
-							<span class="ttr-icon"><i class="ti-home"></i></span>
-		                	<span class="ttr-label">Dashborad</span>
-		                </a>
-		            </li>
-					<li>
-						<a href="{{ url('admin/faculties') }}" class="ttr-material-button active">
-							<span class="ttr-icon"><i class="ti-home"></i></span>
-		                	<span class="ttr-label">Faculties</span>
-		                </a>
-		            </li>
-					<li>
-						<a href="{{ url('admin/departments') }}" class="ttr-material-button">
-							<span class="ttr-icon"><i class="ti-book"></i></span>
-		                	<span class="ttr-label">Departments</span>
-		                </a>
-		            </li>
-					<li>
-						<a href="{{ url('admin/courses') }}" class="ttr-material-button">
-							<span class="ttr-icon"><i class="ti-book"></i></span>
-		                	<span class="ttr-label">Courses</span>
-		                </a>
-		            </li>
-					<li>
-						<a href="{{ url('admin/students') }}" class="ttr-material-button">
-							<span class="ttr-icon"><i class="ti-user"></i></span>
-		                	<span class="ttr-label">Student</span>
-		                </a>
-		            </li>
-					<li>
-						<a href="{{ url('admin/classes') }}" class="ttr-material-button">
-							<span class="ttr-icon"><i class="ti-book"></i></span>
-		                	<span class="ttr-label">Classes</span>
-		                </a>
-		            </li>
-					<li>
-						<a href="{{ url('admin/subjects') }}" class="ttr-material-button">
-							<span class="ttr-icon"><i class="ti-book"></i></span>
-		                	<span class="ttr-label">Subjects</span>
-		                </a>
-		            </li>
-					<li>
-						<a href="{{ url('admin/profile') }}" class="ttr-material-button">
-							<span class="ttr-icon"><i class="ti-user"></i></span>
-		                	<span class="ttr-label">My Profile</span>
-		                </a>
-		            </li>
-					<li>
-						<a href="{{ url('logout') }}" class="ttr-material-button">
-							<span class="ttr-icon"><i class="ti-lock"></i></span>
-		                	<span class="ttr-label">Logout</span>
-		                </a>
-		            </li>
-				</ul>
-				<!-- sidebar menu end -->
-			</nav>
-			<!-- sidebar menu end -->
-		</div>
-	</div>
-	<!-- Left sidebar menu end -->

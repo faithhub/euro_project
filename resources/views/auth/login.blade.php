@@ -53,7 +53,7 @@
 <div class="page-wraper">
 	<div id="loading-icon-bx"></div>
 	<div class="account-form">
-		<div class="account-head" style="background-image:url({{ asset('web/assets/images/background/bg2.jpg') }});">
+		<div class="account-head" style="background-image:url({{ asset('web/assets/images/slider/futo.jpg') }});">
 			<a href="{{ url('index') }}"><img src="{{ asset('web/assets/images/logo-white-2.png') }}" alt=""></a>
 		</div>
 		<div class="account-form-inner">
@@ -82,8 +82,7 @@
 							<div class="form-group">
 								<div class="input-group"> 
 									<label>Your Password</label>
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
-    
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">    
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

@@ -24,7 +24,9 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/level/{dept_id}/{faculty_id}', [App\Http\Controllers\LevelController::class, 'index']);
+Route::get('/department/{faculty_id}/{dept_id}', [App\Http\Controllers\DepartmentController::class, 'index']);
+Route::get('/level/{faculty_id}/{dept_id}/{level_id}', [App\Http\Controllers\LevelController::class, 'index']);
+Route::get('/semester/{faculty_id}/{dept_id}/{level_id}/{semester_id}', [App\Http\Controllers\SemesterController::class, 'index']);
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact']);
 Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq']);
 
@@ -73,21 +75,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 
   //Faculties
   Route::match(['get', 'post'], '/faculties', [App\Http\Controllers\Admin\FacultyController::class, 'create'])->name('admin_create_faculty');
+  Route::get('/create-faculty', [App\Http\Controllers\Admin\FacultyController::class, 'create_new']);
   Route::get('/edit-faculty/{id}', [App\Http\Controllers\Admin\FacultyController::class, 'edit']);
   Route::get('/view-faculty/{id}', [App\Http\Controllers\Admin\FacultyController::class, 'view']);
   Route::get('/delete-faculty/{id}', [App\Http\Controllers\Admin\FacultyController::class, 'delete']);
 
   //Departments
   Route::match(['get', 'post'], '/departments', [App\Http\Controllers\Admin\DepartmentController::class, 'create'])->name('admin_create_department');
+  Route::get('/create-department', [App\Http\Controllers\Admin\DepartmentController::class, 'create_new']);
   Route::get('/edit-department/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'edit']);
   Route::get('/delete-department/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'delete']);
+  Route::get('/view-department-level/{id}', [App\Http\Controllers\Admin\DepartmentController::class, 'level']);
+  Route::get('/view-dept-level/{faculty}/{id}/{level}', [App\Http\Controllers\Admin\DepartmentController::class, 'dept_level']);
 
-  
+
   //Courses
   Route::match(['get', 'post'], '/courses', [App\Http\Controllers\Admin\CoursesController::class, 'create'])->name('admin_create_course');
   Route::get('/create-course', [App\Http\Controllers\Admin\CoursesController::class, 'create_page']);
   Route::post('/fetch-dept', [App\Http\Controllers\Admin\CoursesController::class, 'dept']);
   Route::get('/edit-course/{id}', [App\Http\Controllers\Admin\CoursesController::class, 'edit']);
+  Route::get('/view-course/{faculty_id}/{dept_id}/{level_id}/{semester_id}/{course_id}', [App\Http\Controllers\Admin\CoursesController::class, 'view']);
   Route::get('/delete-course/{id}', [App\Http\Controllers\Admin\CoursesController::class, 'delete']);
 
   //Teacher

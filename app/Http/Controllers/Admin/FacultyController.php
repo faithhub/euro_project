@@ -39,17 +39,17 @@ class FacultyController extends Controller
                     Session::flash('warning', 'Please check the form again!');
                     return back()->withErrors($validator)->withInput();
                 } else {
-                        try {                                       
-                            $faculty = Faculties::find($request->id);
-                            $faculty->name = $request->name;
-                            $faculty->code = $request->code;
-                            $faculty->save();
-                            Session::flash('success', 'Faculty Updated Successfully');
-                            return redirect('admin/faculties');
-                        } catch (\Throwable $th) {
-                            Session::flash('error', $th->getMessage());
-                            return redirect('admin/faculties');
-                        }
+                    try {
+                        $faculty = Faculties::find($request->id);
+                        $faculty->name = $request->name;
+                        $faculty->code = $request->code;
+                        $faculty->save();
+                        Session::flash('success', 'Faculty Updated Successfully');
+                        return redirect('admin/faculties');
+                    } catch (\Throwable $th) {
+                        Session::flash('error', $th->getMessage());
+                        return redirect('admin/faculties');
+                    }
                 }
             } else {
                 $rules = array(
@@ -77,7 +77,7 @@ class FacultyController extends Controller
                                 try {
                                     $this->create_new->create($request);
                                     Session::flash('success', 'Faculty Added Successfully');
-                                    return \back();
+                                    return redirect('admin/faculties');
                                 } catch (\Throwable $th) {
                                     Session::flash('error', $th->getMessage());
                                     return \back();
@@ -95,10 +95,10 @@ class FacultyController extends Controller
             }
         } else {
             // ->with('subjects:id,name')->paginate(15)
-            $data['faculties'] = Faculties::orderBy('id', 'ASC')->get();
+            $data['faculties'] = $f = Faculties::withCount('department')->orderBy('id', 'ASC')->get();
             $data['title'] = 'Faculties';
             $data['sn'] = 1;
-            $data['mode'] = 'create';
+            $data['mode'] = 'index';
             return view('admin.faculties.index', $data);
         }
     }
@@ -106,11 +106,24 @@ class FacultyController extends Controller
     public function view($id)
     {
         try {
-            $data['faculty'] = Faculties::where(['id' => $id])->first();
-            $data['departments'] = Department::where('faculty_id', $id)->get();
-            $data['title'] = 'Faculties';
+            $data['faculty'] = $f = Faculties::where(['id' => $id])->first();
+            $data['departments'] = Department::withCount('course')->where('faculty_id', $id)->get();
+            $data['title'] = 'Faculty of ' . $f->name . ' ' . $f->code;
             $data['sn'] = 1;
             return view('admin.faculties.view', $data);
+        } catch (\Throwable $th) {
+            Session::flash('error', $th->getMessage());
+            return \back();
+        }
+    }
+    public function create_new()
+    {
+        try {
+            $data['faculties'] = Faculties::orderBy('id', 'ASC')->get();
+            $data['title'] = 'Faculties';
+            $data['sn'] = 1;
+            $data['mode'] = 'create';
+            return view('admin.faculties.create', $data);
         } catch (\Throwable $th) {
             Session::flash('error', $th->getMessage());
             return \back();
@@ -120,12 +133,11 @@ class FacultyController extends Controller
     public function edit($id)
     {
         try {
-            $data['get_faculty'] = Faculties::where(['id' => $id])->first();
-            $data['faculties'] = Faculties::orderBy('id', 'ASC')->get();
-            $data['title'] = 'Faculties';
+            $data['faculty'] = $f = Faculties::where(['id' => $id])->first();
+            $data['title'] = 'Edit Faculty ' . $f->name;
             $data['sn'] = 1;
             $data['mode'] = 'edit';
-            return view('admin.faculties.index', $data);
+            return view('admin.faculties.create', $data);
         } catch (\Throwable $th) {
             Session::flash('error', $th->getMessage());
             return \back();

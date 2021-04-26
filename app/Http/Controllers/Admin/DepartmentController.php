@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
 use App\Models\Department;
 use App\Models\Faculties;
+use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -38,7 +40,7 @@ class DepartmentController extends Controller
                     Session::flash('warning', 'Please check the form again!');
                     return back()->withErrors($validator)->withInput();
                 } else {
-                    try {                                       
+                    try {
                         $faculty = Department::find($request->id);
                         $faculty->name = $request->name;
                         $faculty->faculty_id = $request->faculty_id;
@@ -76,7 +78,7 @@ class DepartmentController extends Controller
                                 try {
                                     $this->create_new->create($request);
                                     Session::flash('success', 'Department Added Successfully');
-                                    return \back();
+                                    return redirect('admin/departments');
                                 } catch (\Throwable $th) {
                                     Session::flash('error', $th->getMessage());
                                     return \back();
@@ -93,11 +95,11 @@ class DepartmentController extends Controller
                 }
             }
         } else {
-            $data['departments'] = Department::with('faculty:id,name,code')->orderBy('id', 'ASC')->get();
+            $data['departments'] = Department::with('faculty:id,name,code')->withCount('course')->orderBy('id', 'ASC')->get();
             $data['faculties'] = Faculties::orderBy('id', 'ASC')->get();
             $data['title'] = 'Departments';
             $data['sn'] = 1;
-            $data['mode'] = 'create';
+            $data['mode'] = 'index';
             return view('admin.departments.index', $data);
         }
     }
@@ -105,13 +107,61 @@ class DepartmentController extends Controller
     public function edit($id)
     {
         try {
-            $data['get_department'] = Department::where(['id' => $id])->first();
+            $data['department'] = $d = Department::where(['id' => $id])->first();
+            $data['faculties'] = Faculties::orderBy('id', 'ASC')->get();
+            $data['title'] = 'Edit Department ' . $d->name;
+            $data['sn'] = 1;
+            $data['mode'] = 'edit';
+            return view('admin.departments.create', $data);
+        } catch (\Throwable $th) {
+            Session::flash('error', $th->getMessage());
+            return \back();
+        }
+    }
+
+    public function level($id)
+    {
+        try {
+            $data['department'] = $d = Department::where(['id' => $id])->first();
+            $data['levels'] = Level::orderBy('level', 'ASC')->get();
+            $data['title'] = 'View Department ' . $d->name . 'Levels';
+            $data['sn'] = 1;
+            return view('admin.departments.level', $data);
+        } catch (\Throwable $th) {
+            Session::flash('error', $th->getMessage());
+            return \back();
+        }
+    }
+
+    public function dept_level($faculty, $id, $level)
+    {
+        try {
+            $data['department'] = $d = Department::where(['id' => $id])->first();
+            $data['level'] = $l = Level::where('level', $level)->first();
+            $data['courses'] = $c = Course::where(function ($query) use ($faculty, $id, $level) {
+                $query->where('department_id', '=', 0)->orWhere('department_id', '=', $id);
+            })->Where(
+                function ($query) use ($faculty, $id, $level) {
+                    $query->where(['faculty_id' => $faculty, 'level' => $level]);
+                }
+            )->with('levels:*')->get();
+            $data['title'] = 'Department of ' . $d->name . ' ' . $l->name . ' Courses';
+            $data['sn'] = 1;
+            return view('admin.departments.course', $data);
+        } catch (\Throwable $th) {
+            Session::flash('error', $th->getMessage());
+            return \back();
+        }
+    }
+    public function create_new()
+    {
+        try {
             $data['departments'] = Department::with('faculty:id,name,code')->orderBy('id', 'ASC')->get();
             $data['faculties'] = Faculties::orderBy('id', 'ASC')->get();
             $data['title'] = 'Departments';
             $data['sn'] = 1;
-            $data['mode'] = 'edit';
-            return view('admin.departments.index', $data);
+            $data['mode'] = 'create';
+            return view('admin.departments.create', $data);
         } catch (\Throwable $th) {
             Session::flash('error', $th->getMessage());
             return \back();

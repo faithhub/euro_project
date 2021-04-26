@@ -20,28 +20,28 @@ class LevelSeeder extends Seeder
         ];
         if (DB::table('levels')->get()->count() != 0) {
             DB::table('levels')->delete();
-            DB::table('levels')->insert([
-                [
-                    'name' => '100 Level',
-                    'level' => '1'
-                ],
-                [
-                    'name' => '200 Level',
-                    'level' => '2'
-                ],
-                [
-                    'name' => '300 Level',
-                    'level' => '3'
-                ],
-                [
-                    'name' => '400 Level',
-                    'level' => '4'
-                ],
-                [
-                    'name' => '500 Level',
-                    'level' => '5'
-                ]
-            ]);
         }
+        DB::table('levels')->insert([
+            [
+                'name' => '100 Level',
+                'level' => '1'
+            ],
+            [
+                'name' => '200 Level',
+                'level' => '2'
+            ],
+            [
+                'name' => '300 Level',
+                'level' => '3'
+            ],
+            [
+                'name' => '400 Level',
+                'level' => '4'
+            ],
+            [
+                'name' => '500 Level',
+                'level' => '5'
+            ]
+        ]);
     }
 }

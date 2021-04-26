@@ -12,6 +12,7 @@
           <ul>
             <li>
               <select class="header-lang-bx">
+                <option data-icon="flag flag-">Nigeria NGN</option>
                 <option data-icon="flag flag-uk">English UK</option>
                 <option data-icon="flag flag-us">English US</option>
               </select>
@@ -70,7 +71,7 @@
 								<ul class="sub-menu">                  
                   @foreach ($departments as $department)
                   @if ($faculty->id == $department->faculty_id)                      
-                      <li><a href="{{ url('level/'.$department->id.'/'.$faculty->id) }}">{{$department->name}}</a></li>
+                      <li><a href="{{ url('department/'.$faculty->id, $department->id) }}">{{$department->name}}</a></li>
                   @endif
                   @endforeach
 								</ul>

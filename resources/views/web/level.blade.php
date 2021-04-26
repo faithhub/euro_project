@@ -1,6 +1,14 @@
 @extends('web.layouts.app')
 @section('content')
-
+<style>
+    .cours-bx:hover{
+	border-radius: 10px;
+	box-shadow: 0 0 25px 0 rgb(29 25 0 / 25%);
+    border-radius: 4px;
+    overflow: hidden;
+	background-color: rgba(7, 146, 65, 0.647);
+}
+</style>
 <div class="page-content bg-white">
     <!-- inner page banner -->
     <div class="page-banner ovbl-dark" style="background-image:url({{ asset('web/assets/images/slider/futo.jpg')}});">
@@ -30,7 +38,7 @@
                         <div class="row">
                             @foreach ($levels as $level)
                             <div class="col-md-4 col-lg-3 col-sm-4 m-b30">
-                                <a href="{{ url('level/'.$level->id.'/'.$department->id.'/'.$department->faculty->id) }}">
+                                <a href="{{ url('level/'.$department->faculty->id.'/'.$department->id, $level->id) }}">
                                     <div class="cours-bx pt-4 pb-4">
                                         <div class="info-bx text-center">
                                             <h5>{{$level->name}}</h5>
