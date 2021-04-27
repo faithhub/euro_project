@@ -50,10 +50,10 @@
 																				<div class="form-group row mb-4">
 																						<label class="col-sm-2 col-form-label">Select Faculty</label>
 																						<div class="col-sm-10">
-																							<select class="form-control faculty-option-field" id="faculty" name="faculty_id" onchange="getDept(this)">
+																							<select class="form-control faculty-option-field" id="faculty" name="faculty_id" onchange="getDeptSingle(this)">
 																								<option value="">Open this select menu</option>
 																								@foreach ($faculties as $faculty)
-																								<option class="text-capitalize" @isset($course) {{ $course->faculty_id == $faculty->id ? "selected" : "" }} @else {{ old('faculty_id') == $faculty->id ? "selected" : "" }} @endisset value="{{$faculty->id}}">{{$faculty->name}} ({{$faculty->code}})</option>                                                
+																								<option class="text-capitalize" {{ old('faculty_id') == $faculty->id ? "selected" : "" }} value="{{$faculty->id}}">{{$faculty->name}} ({{$faculty->code}})</option>                                                
 																								@endforeach
 																							</select>
 																							@error('faculty_id')
@@ -67,10 +67,10 @@
 																				<div class="form-group row mb-4" id="dept">
 																						<label class="col-sm-2 col-form-label">Select Dept.</label>
 																						<div class="col-sm-10">
-																							<select id="department" name="department_id" id="department" class="form-control department-option-field">
+																							<select name="department_id" id="department_single" class="form-control department-option-field">
 																								<option value="">Open this select menu</option>
 																								@foreach ($departments as $department)
-																								<option class="text-capitalize" @isset($course) {{ $course->faculty_id == $faculty->id ? "selected" : "" }} @else {{ old('department_id') == $department->id ? "selected" : "" }} @endisset value="{{$department->id}}">{{$department->name}}</option>                                                
+																								<option class="text-capitalize" {{ old('department_id') == $department->id ? "selected" : "" }} value="{{$department->id}}">{{$department->name}}</option>                                                
 																								@endforeach
 																							</select>
 																							@error('department_id')
@@ -84,10 +84,10 @@
 																				<div class="form-group row mb-4">
 																						<label class="col-sm-2 col-form-label">Select Level</label>
 																						<div class="col-sm-10">
-																							<select class="form-control level-option-field" id="level" name="level_id">
+																							<select class="form-control level-option-field" id="level_single" name="level_id">
 																								<option value="">Open this select menu</option>
 																								@foreach ($levels as $level)
-																								<option class="text-capitalize" @isset($course) {{ $course->level == $level->level ? "selected" : "" }} @else {{ old('level') == $level->level ? "selected" : "" }} @endisset  @isset($course) value="{{ $course->level }}" @else value="{{$level->level}}" @endisset >{{$level->name}}</option>                                                
+																								<option class="text-capitalize" {{ old('level_id') == $level->level ? "selected" : "" }} value="{{$level->level}}" >{{$level->name}}</option>                                                
 																								@endforeach
 																							</select>
 																							@error('level_id')
@@ -175,13 +175,13 @@
 																				<div class="form-group row mb-4">
 																						<label class="col-sm-2 col-form-label">Select Faculty</label>
 																						<div class="col-sm-10">
-																							<select class="form-control faculty-option-field" id="faculty" name="faculty_id" onchange="getDept(this)">
+																							<select class="form-control faculty-option-field" id="faculty_bulk" name="bulk_faculty_id" onchange="getDeptBulk(this)">
 																								<option value="">Open this select menu</option>
 																								@foreach ($faculties as $faculty)
-																								<option class="text-capitalize" @isset($course) {{ $course->faculty_id == $faculty->id ? "selected" : "" }} @else {{ old('faculty_id') == $faculty->id ? "selected" : "" }} @endisset value="{{$faculty->id}}">{{$faculty->name}} ({{$faculty->code}})</option>                                                
+																								<option class="text-capitalize" @isset($course) {{ $course->faculty_id == $faculty->id ? "selected" : "" }} @else {{ old('bulk_faculty_id') == $faculty->id ? "selected" : "" }} @endisset value="{{$faculty->id}}">{{$faculty->name}} ({{$faculty->code}})</option>                                                
 																								@endforeach
 																							</select>
-																							@error('faculty_id')
+																							@error('bulk_faculty_id')
 																								<span class="invalid-feedback mb-2" role="alert" style="display: block">
 																									<strong>{{ $message }}</strong>
 																								</span>
@@ -192,13 +192,13 @@
 																				<div class="form-group row mb-4" id="dept">
 																						<label class="col-sm-2 col-form-label">Select Dept.</label>
 																						<div class="col-sm-10">
-																							<select id="department" name="department_id" id="department" class="form-control department-option-field">
+																							<select name="bulk_department_id" id="department_bulk" class="form-control department-option-field">
 																								<option value="">Open this select menu</option>
 																								@foreach ($departments as $department)
-																								<option class="text-capitalize" @isset($course) {{ $course->faculty_id == $faculty->id ? "selected" : "" }} @else {{ old('department_id') == $department->id ? "selected" : "" }} @endisset value="{{$department->id}}">{{$department->name}}</option>                                                
+																								<option class="text-capitalize" @isset($course) {{ $course->faculty_id == $faculty->id ? "selected" : "" }} @else {{ old('bulk_department_id') == $department->id ? "selected" : "" }} @endisset value="{{$department->id}}">{{$department->name}}</option>                                                
 																								@endforeach
 																							</select>
-																							@error('department_id')
+																							@error('bulk_department_id')
 																								<span class="invalid-feedback mb-2" role="alert" style="display: block">
 																									<strong>{{ $message }}</strong>
 																								</span>
@@ -209,13 +209,13 @@
 																				<div class="form-group row mb-4">
 																						<label class="col-sm-2 col-form-label">Select Level</label>
 																						<div class="col-sm-10">
-																							<select class="form-control level-option-field" id="level" name="level_id">
+																							<select class="form-control level-option-field" id="level" name="bulk_level_id">
 																								<option value="">Open this select menu</option>
 																								@foreach ($levels as $level)
-																								<option class="text-capitalize" @isset($course) {{ $course->level == $level->level ? "selected" : "" }} @else {{ old('level') == $level->level ? "selected" : "" }} @endisset  @isset($course) value="{{ $course->level }}" @else value="{{$level->level}}" @endisset >{{$level->name}}</option>                                                
+																								<option class="text-capitalize" @isset($course) {{ $course->level == $level->level ? "selected" : "" }} @else {{ old('bulk_level_id') == $level->level ? "selected" : "" }} @endisset  @isset($course) value="{{ $course->level }}" @else value="{{$level->level}}" @endisset >{{$level->name}}</option>                                                
 																								@endforeach
 																							</select>
-																							@error('level_id')
+																							@error('bulk_level_id')
 																								<span class="invalid-feedback mb-2" role="alert" style="display: block">
 																									<strong>{{ $message }}</strong>
 																								</span>
@@ -270,6 +270,45 @@
 			</div><!-- end col-lg-12 -->
 		</div><!-- end row -->
 </div>
+<script>
+	function getDeptBulk(sel)
+        {
+            //alert(sel.value);
+            $.ajax({
+            type: "POST",
+            url: "{{ url('admin/fetch-dept') }}",
+            data: {"_token": "{{ csrf_token() }}","id":sel.value},
+            success: function (response) {  
+                // console.log(response)
+                  $("#department_bulk").attr('disabled', false);
+                  $("#department_bulk").find('option').remove();
+                  $.each(response, function(key, value)
+                  {
+                      $("#department_bulk").append('<option class="text-capitalize" value=' + value.id + '>' + value.name + '</option>');
+                  });
+            }
+        });
+        }
+
+			function getDeptSingle(sel)
+			{
+					//alert(sel.value);
+					$.ajax({
+					type: "POST",
+					url: "{{ url('admin/fetch-dept') }}",
+					data: {"_token": "{{ csrf_token() }}","id":sel.value},
+					success: function (response) {  
+							console.log(response)
+								$("#department_single").attr('disabled', false);
+								$("#department_single").find('option').remove();
+								$.each(response, function(key, value)
+								{
+										$("#department_single").append('<option class="text-capitalize" value=' + value.id + '>' + value.name + '</option>');
+								});
+					}
+			});
+			}
+</script>
 	<!--Main container start -->
 	<main class="ttr-wrapper">
 		<div class="container-fluid">

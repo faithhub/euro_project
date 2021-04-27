@@ -28,9 +28,9 @@ class StudentController extends Controller
 
     public function index()
     {
-        $data['title'] = 'Students';
+        $data['title'] = 'All Students';
         $data['sn'] = 1;
-        $data['students'] = User::where('role', 'Student')->with('classes:id,name')->paginate(15);
+        $data['students'] = User::where('role', 'Student')->with('faculty:id,name')->with('dept:id,name')->paginate(15);
         return view('admin.students.index', $data);
     }
 
@@ -42,7 +42,7 @@ class StudentController extends Controller
                     'faculty_id' => ['required', 'max:255'],
                     'department_id' => ['required', 'max:255'],
                     'level_id' => ['required', 'max:255'],
-                    'matric_number' => ['required', 'max:255'],
+                    'matric_number' => ['required', 'max:255', 'unique:users,email,'.$request->id],
                     'first_name' => ['required', 'max:255'],
                     'last_name' => ['required', 'max:255'],
                 );
@@ -63,9 +63,12 @@ class StudentController extends Controller
                 } else {
                     try {
                         $user = User::find($request->id);
-                        $user->surname = $request->surname;
+                        $user->email = $request->matric_number;
+                        $user->first_name = $request->first_name;
                         $user->last_name = $request->last_name;
-                        // $user->class_id = $request->class;
+                        $user->faculty_id = $request->faculty_id;
+                        $user->dept_id = $request->department_id;
+                        $user->level_id = $request->level_id;
                         $user->save();
                         $this->check_student();
                         Session::flash('success', 'Student Updated Successfully');
@@ -80,7 +83,7 @@ class StudentController extends Controller
                     'faculty_id' => ['required', 'max:255'],
                     'department_id' => ['required', 'max:255'],
                     'level_id' => ['required', 'max:255'],
-                    'matric_number' => ['required', 'max:255'],
+                    'matric_number' => ['required', 'max:255', 'unique:users,email'],
                     'first_name' => ['required', 'max:255'],
                     'last_name' => ['required', 'max:255'],
                 );
@@ -117,7 +120,6 @@ class StudentController extends Controller
             $data['faculties'] = Faculties::orderBy('name', 'ASC')->get();
             $data['departments'] = Department::orderBy('name', 'ASC')->get();
             $data['levels'] = Level::orderBy('id', 'ASC')->get();
-            $data['semesters'] = Semester::orderBy('id', 'ASC')->get();
             $data['classes'] = Classes::all()->groupBy('class_id');
             return view('admin.students.create', $data);
         }
@@ -160,10 +162,11 @@ class StudentController extends Controller
         try {
             $data['student'] = User::where(['id' => $id, 'role' => 'Student'])->first();
             $data['title'] = 'Edit Student';
-            $data['sn'] = 1;
-            $data['mode'] = 'edit';
+            $data['faculties'] = Faculties::orderBy('name', 'ASC')->get();
+            $data['departments'] = Department::orderBy('name', 'ASC')->get();
+            $data['levels'] = Level::orderBy('id', 'ASC')->get();
             $data['classes'] = Classes::all()->groupBy('class_id');
-            return view('admin.student.create', $data);
+            return view('admin.students.edit', $data);
         } catch (\Throwable $th) {
             Session::flash('error', $th->getMessage());
             return \back();

@@ -68,7 +68,7 @@ class User extends Authenticatable
         $save->first_name = $data['first_name'];
         $save->last_name = $data['last_name'];
         $save->faculty_id = $data['faculty_id'];
-        $save->department_id = $data['department_id'];
+        $save->dept_id = $data['department_id'];
         $save->level_id = $data['level_id'];
         $save->role = 'Student';
         $save->password = Hash::make($pass);
@@ -79,8 +79,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Subject::class, 'class_id');
     }
-    public function classes()
+    public function faculty()
     {
-        return $this->belongsTo(Classes::class, 'class_id');
+        return $this->belongsTo(Faculties::class, 'faculty_id');
+    }
+    public function dept()
+    {
+        return $this->belongsTo(Department::class, 'dept_id');
     }
 }
