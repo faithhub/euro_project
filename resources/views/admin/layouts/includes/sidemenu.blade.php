@@ -23,7 +23,7 @@
                     </li>
 
 
-                    <li class="{{ request()->is('admin/students*') || request()->is('admin/create-student') || request()->is('admin/edit-student*')  ? 'page-active' : '' }}">
+                    <li class="{{ request()->is('admin/students*') || request()->is('admin/create-student') || request()->is('admin/edit-student*') || request()->is('admin/view-student*')  ? 'page-active' : '' }}">
                         <a href="#"><i class="la la-users icon-element"></i> Students <span class="la la-caret-down btn-toggle"></span></a>
                         <ul class="dropdown-menu-item">
                             <li><a href="{{ url('admin/students') }}"> All Students</a></li>

@@ -187,7 +187,7 @@ class StudentController extends Controller
         try {
             $data['student'] = $u = User::where(['id' => $id, 'role' => 'Student'])->with('faculty:id,name')->with('dept:id,name')->with('level:id,name')->first();
             $data['title'] = $u->first_name.' '.$u->last_name;
-            return view('admin.students.edit', $data);
+            return view('admin.students.view', $data);
         } catch (\Throwable $th) {
             Session::flash('error', $th->getMessage());
             return \back();

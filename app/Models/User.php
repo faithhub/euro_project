@@ -79,7 +79,7 @@ class User extends Authenticatable
 
     public function level()
     {
-        return $this->belongsTo(Subject::class, 'level');
+        return $this->belongsTo(Level::class, 'level_id');
     }
     public function faculty()
     {
