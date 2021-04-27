@@ -102,7 +102,7 @@
 													<a href="{{ url('admin/unblock-student', $student->id) }}" title="Grant Access" class="btn btn-dark m-1"><i class="la la-unlock" data-toggle="tooltip" data-placement="top"></i></a>
                           @endif
 													<a href="{{ url('admin/edit-student', $student->id) }}" title="Edit Student" class="btn btn-dark m-1"><i class="la la-pencil" data-toggle="tooltip" data-placement="top"></i></a>
-													<a href="{{ url('admin/delete-student', $student->id) }}" title="Delete Student" class="btn btn-danger m-1" onclick="return confirm('Are you sure you want to delete this Faculty?')" ><i class="la la-trash" data-toggle="tooltip" data-placement="top"></i></a>
+													<a href="{{ url('admin/delete-student', $student->id) }}" title="Delete Student" class="btn btn-danger m-1" onclick="return confirm('Are you sure you want to delete this Student?')" ><i class="la la-trash" data-toggle="tooltip" data-placement="top"></i></a>
 												</div>
 											</td>
 										</tr>

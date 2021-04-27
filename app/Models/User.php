@@ -62,12 +62,14 @@ class User extends Authenticatable
     public function create_student($data)
     {
         $id = mt_rand(1000, 9999);
-        $pass = strtolower($data['surname']);
+        $pass = strtolower($data['first_name']);
         $save = new self;
-        $save->email = 'ST' . $id;
-        $save->surname = $data['surname'];
+        $save->email = $data['matric_number'];
+        $save->first_name = $data['first_name'];
         $save->last_name = $data['last_name'];
-        $save->class_id = $data['class'];
+        $save->faculty_id = $data['faculty_id'];
+        $save->department_id = $data['department_id'];
+        $save->level_id = $data['level_id'];
         $save->role = 'Student';
         $save->password = Hash::make($pass);
         $save->save();

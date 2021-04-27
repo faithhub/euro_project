@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Imports\UsersImport;
 use App\Models\Result;
+use App\Models\Department;
+use App\Models\Faculties;
+use App\Models\Level;
+use App\Models\Semester;
 use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
@@ -35,14 +39,20 @@ class StudentController extends Controller
         if ($_POST) {
             if ($request->id) {
                 $rules = array(
-                    'surname' => ['required', 'max:255'],
+                    'faculty_id' => ['required', 'max:255'],
+                    'department_id' => ['required', 'max:255'],
+                    'level' => ['required', 'max:255'],
+                    'matric_number' => ['required', 'max:255'],
+                    'first_name' => ['required', 'max:255'],
                     'last_name' => ['required', 'max:255'],
-                    // 'class' => ['required']
                 );
                 $fieldNames = array(
-                    'surname'   => 'Surname',
-                    'last_name' => 'Last Name',
-                    // 'class' => 'Class'
+                    'faculty_id'   => 'Student Faculty',
+                    'department_id' => 'Student Department',
+                    'level'   => 'Student Level',
+                    'matric_number' => 'Student Matric Number',
+                    'first_name'   => 'Student First Name',
+                    'last_name' => 'Student Last Name',
                 );
                 //dd($request->all());
                 $validator = Validator::make($request->all(), $rules);
@@ -67,14 +77,20 @@ class StudentController extends Controller
                 }
             } else {
                 $rules = array(
-                    'surname' => ['required', 'max:255'],
+                    'faculty_id' => ['required', 'max:255'],
+                    'department_id' => ['required', 'max:255'],
+                    'level_id' => ['required', 'max:255'],
+                    'matric_number' => ['required', 'max:255'],
+                    'first_name' => ['required', 'max:255'],
                     'last_name' => ['required', 'max:255'],
-                    'class' => ['required']
                 );
                 $fieldNames = array(
-                    'surname'   => 'Surname',
-                    'last_name' => 'Last Name',
-                    'class' => 'Class'
+                    'faculty_id'   => 'Student Faculty',
+                    'department_id' => 'Student Department',
+                    'level_id'   => 'Student Level',
+                    'matric_number' => 'Student Matric Number',
+                    'first_name'   => 'Student First Name',
+                    'last_name' => 'Student Last Name',
                 );
                 //dd($request->all());
                 $validator = Validator::make($request->all(), $rules);
@@ -98,6 +114,10 @@ class StudentController extends Controller
             $data['title'] = 'Create New Students';
             $data['sn'] = 1;
             $data['mode'] = 'create';
+            $data['faculties'] = Faculties::orderBy('name', 'ASC')->get();
+            $data['departments'] = Department::orderBy('name', 'ASC')->get();
+            $data['levels'] = Level::orderBy('id', 'ASC')->get();
+            $data['semesters'] = Semester::orderBy('id', 'ASC')->get();
             $data['classes'] = Classes::all()->groupBy('class_id');
             return view('admin.students.create', $data);
         }
