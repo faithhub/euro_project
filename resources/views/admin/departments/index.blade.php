@@ -87,19 +87,11 @@
 													<a href="{{ url('admin/edit-department', $department->id) }}" class="btn btn-dark m-1"><i class="la la-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 													<a href="{{ url('admin/delete-department', $department->id) }}"class="btn btn-danger m-1" onclick="return confirm('Are you sure you want to delete this Faculty?')" ><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Delete"></i></a>
 												</div>
-												{{-- <div class="manage-candidate-wrap">
-													<div class="bread-action pt-0">
-														<a href="{{ url('admin/view-department', $department->id) }}" class="btn btn-success"><i class="la la-eye" data-toggle="tooltip" data-placement="top" title="View"></i></a>
-														<a href="{{ url('admin/edit-department', $department->id) }}" class="btn btn-dark"><i class="la la-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-														<a href="{{ url('admin/delete-department', $department->id) }}"class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Faculty?')" ><i class="la la-trash" data-toggle="tooltip" data-placement="top" title="Delete"></i></a>
-													</div>
-												</div> --}}
 											</td>
 										</tr>
 									@endforeach
 									</tbody>
-								</table>		  
-								{{-- <div id="pagination" class="text-center" style="display:inline"></div> --}}
+								</table>
 							@endif
 						@endisset
                 	</div>
