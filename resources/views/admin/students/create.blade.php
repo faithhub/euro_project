@@ -226,7 +226,7 @@
 																				<div class="form-group row mb-4">
 																						<label class="col-sm-2 col-form-label">Student Bulk</label>
 																						<div class="col-sm-10">
-																							<input class="form-control @error('bulk_student') is-invalid @enderror" name="bulk_student" type="file" value="{{ old('bulk_student') }}">
+																							<input class="form-control @error('bulk_student') is-invalid @enderror" name="bulk_student" type="file" accept=".csv .xlsx .xls" value="{{ old('bulk_student') }}">
 																							@error('bulk_student')
 																								<span class="invalid-feedback mb-2" role="alert" style="display: block">
 																									<strong>{{ $message }}</strong>
@@ -238,7 +238,7 @@
 																					<div class="col-sm-12  ml-auto">
 																							<h6>Note: First Name is password by default in lowercase<br>
 																									Note: The Excel Sheet format must match below sample<br><br>
-																									<img src="{{ asset('uploads/excel.png') }}">
+																									<img src="{{ asset('uploads/upload_format.jpg') }}">
 																							</h6>
 																					</div>
 																				</div>	

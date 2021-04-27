@@ -109,6 +109,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
   Route::match(['get', 'post'], 'create-student', [App\Http\Controllers\Admin\StudentController::class, 'create'])->name('admin_create_student');
   Route::post('create_bulk_student', [App\Http\Controllers\Admin\StudentController::class, 'create_bulk'])->name('admin_create_bulk_student');
   Route::get('/edit-student/{id}', [App\Http\Controllers\Admin\StudentController::class, 'edit']);
+  Route::get('/view-student/{id}', [App\Http\Controllers\Admin\StudentController::class, 'view']);
   Route::get('/delete-student/{id}', [App\Http\Controllers\Admin\StudentController::class, 'delete']);
   Route::get('/block-student/{id}', [App\Http\Controllers\Admin\StudentController::class, 'block']);
   Route::get('/unblock-student/{id}', [App\Http\Controllers\Admin\StudentController::class, 'unblock']);

@@ -42,7 +42,7 @@ class StudentController extends Controller
                     'faculty_id' => ['required', 'max:255'],
                     'department_id' => ['required', 'max:255'],
                     'level_id' => ['required', 'max:255'],
-                    'matric_number' => ['required', 'max:255', 'unique:users,email,'.$request->id],
+                    'matric_number' => ['required', 'max:255', 'unique:users,email,' . $request->id],
                     'first_name' => ['required', 'max:255'],
                     'last_name' => ['required', 'max:255'],
                 );
@@ -129,12 +129,16 @@ class StudentController extends Controller
     public function create_bulk(Request $request)
     {
         $rules = array(
-            'bulk_student' => ['required', 'max:5000', 'mimes:csv,xls,xlsx'],
-            'bulk_class' => ['required']
+            'bulk_faculty_id' => ['required', 'max:255'],
+            'bulk_department_id' => ['required', 'max:255'],
+            'bulk_level_id' => ['required', 'max:255'],
+            'bulk_student' => ['required', 'mimes:csv,xlsx,xls'],
         );
         $fieldNames = array(
-            'bulk_student'   => 'Student Upload File',
-            'bulk_class' => 'Class'
+            'bulk_faculty_id'   => 'Student Faculty',
+            'bulk_department_id' => 'Student Department',
+            'bulk_level_id'   => 'Student Level',
+            'bulk_student'   => 'Student Bulk File',
         );
         //dd($request->all());
         $validator = Validator::make($request->all(), $rules);
@@ -144,11 +148,15 @@ class StudentController extends Controller
             return back()->withErrors($validator)->withInput();
         } else {
             try {
-                $request->session()->put('bulk_class', $request->bulk_class);
+                $request->session()->put('bulk_faculty_id', $request->bulk_faculty_id);
+                $request->session()->put('bulk_department_id', $request->bulk_department_id);
+                $request->session()->put('bulk_level_id', $request->bulk_level_id);
                 Excel::import(new UsersImport, request()->file('bulk_student'));
-                $this->check_student();
+                // $this->check_student();
                 Session::flash('success', 'Student Uploaded Successfully');
-                $request->session()->forget('bulk_class');
+                $request->session()->forget('bulk_faculty_id');
+                $request->session()->forget('bulk_department_id');
+                $request->session()->forget('bulk_level_id');
                 return redirect('admin/students');
             } catch (\Throwable $th) {
                 Session::flash('error', $th->getMessage());
@@ -166,6 +174,19 @@ class StudentController extends Controller
             $data['departments'] = Department::orderBy('name', 'ASC')->get();
             $data['levels'] = Level::orderBy('id', 'ASC')->get();
             $data['classes'] = Classes::all()->groupBy('class_id');
+            return view('admin.students.edit', $data);
+        } catch (\Throwable $th) {
+            Session::flash('error', $th->getMessage());
+            return \back();
+        }
+    }
+    
+
+    public function view($id)
+    {
+        try {
+            $data['student'] = $u = User::where(['id' => $id, 'role' => 'Student'])->with('faculty:id,name')->with('dept:id,name')->with('level:id,name')->first();
+            $data['title'] = $u->first_name.' '.$u->last_name;
             return view('admin.students.edit', $data);
         } catch (\Throwable $th) {
             Session::flash('error', $th->getMessage());
@@ -214,29 +235,29 @@ class StudentController extends Controller
         }
     }
 
-    public function check_student()
-    {
-        $check = User::where('role', 'Student')->get();
-        foreach ($check as $students) {
-            $chk = Result::where('student_id', $students->email)->get();
-            if ($chk->count() < 1) {
-                $class = Classes::where('class_id', $students->class_id)->get();
-                foreach ($class as $subject) {
-                    $this->create_new_result->create($subject, $students->email);
-                }
-            } elseif ($chk->count() > 0) {
-                $subjects = Classes::where('class_id', $students->class_id)->pluck('subject_id');
-                $chk_std = Result::where('student_id', $students->email)->pluck('subject_id');
-                $subject_id = json_decode($subjects);
-                $chk_std = json_decode($chk_std);
-                $different = array_diff($subject_id, $chk_std);
-                if ($different != null) {
-                    foreach ($different as $diff) {
-                        $subjects = Classes::where('subject_id', $diff)->get();
-                        $this->create_new_result->update_now($subjects, $students->email);
-                    }
-                }
-            }
-        }
-    }
+    // public function check_student()
+    // {
+    //     $check = User::where('role', 'Student')->get();
+    //     foreach ($check as $students) {
+    //         $chk = Result::where('student_id', $students->email)->get();
+    //         if ($chk->count() < 1) {
+    //             $class = Classes::where('class_id', $students->class_id)->get();
+    //             foreach ($class as $subject) {
+    //                 $this->create_new_result->create($subject, $students->email);
+    //             }
+    //         } elseif ($chk->count() > 0) {
+    //             $subjects = Classes::where('class_id', $students->class_id)->pluck('subject_id');
+    //             $chk_std = Result::where('student_id', $students->email)->pluck('subject_id');
+    //             $subject_id = json_decode($subjects);
+    //             $chk_std = json_decode($chk_std);
+    //             $different = array_diff($subject_id, $chk_std);
+    //             if ($different != null) {
+    //                 foreach ($different as $diff) {
+    //                     $subjects = Classes::where('subject_id', $diff)->get();
+    //                     $this->create_new_result->update_now($subjects, $students->email);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }

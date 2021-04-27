@@ -18,10 +18,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'surname',
+        'first_name',
         'last_name',
         'email',
-        'class_id',
+        'faculty_id',
+        'dept_id',
+        'level_id',
         'password',
     ];
 
@@ -50,7 +52,7 @@ class User extends Authenticatable
         $pass = strtolower($data['surname']);
         $save = new self;
         $save->email = 'TCH' . $id;
-        $save->surname = $data['surname'];
+        $save->first_name = $data['first_name'];
         $save->last_name = $data['last_name'];
         $save->class_id = $data['subject_id'];
         $save->role = 'Teacher';
@@ -75,9 +77,9 @@ class User extends Authenticatable
         $save->save();
     }
 
-    public function subjects()
+    public function level()
     {
-        return $this->belongsTo(Subject::class, 'class_id');
+        return $this->belongsTo(Subject::class, 'level');
     }
     public function faculty()
     {

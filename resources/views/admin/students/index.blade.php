@@ -97,9 +97,9 @@
                                   <div class="btn-group" role="group" aria-label="Basic example">
                                     <a href="{{ url('admin/view-student', $student->id) }}"  title="View Student" class="btn btn-success m-1"><i class="la la-eye" data-toggle="tooltip" data-placement="top"></i></a>
                                     @if ($student->status == 'Active')
-                                    <a href="{{ url('admin/block-student', $student->id) }}" title="Denied Access" class="btn btn-dark m-1"><i class="la la-lock" data-toggle="tooltip" data-placement="top"></i></a>
+                                    <a href="{{ url('admin/block-student', $student->id) }}" title="Deny Access" onclick="return confirm('Are you sure you want to Deny Access for this Student?')" class="btn btn-danger m-1"><i class="la la-lock" data-toggle="tooltip" data-placement="top"></i></a>
                                     @else
-                                    <a href="{{ url('admin/unblock-student', $student->id) }}" title="Grant Access" class="btn btn-dark m-1"><i class="la la-unlock" data-toggle="tooltip" data-placement="top"></i></a>
+                                    <a href="{{ url('admin/unblock-student', $student->id) }}" title="Grant Access" onclick="return confirm('Are you sure you want to  Grant this Student Access?')" class="btn btn-success m-1"><i class="la la-unlock" data-toggle="tooltip" data-placement="top"></i></a>
                                     @endif
                                     <a href="{{ url('admin/edit-student', $student->id) }}" title="Edit Student" class="btn btn-dark m-1"><i class="la la-pencil" data-toggle="tooltip" data-placement="top"></i></a>
                                     <a href="{{ url('admin/delete-student', $student->id) }}" title="Delete Student" class="btn btn-danger m-1" onclick="return confirm('Are you sure you want to delete this Student?')" ><i class="la la-trash" data-toggle="tooltip" data-placement="top"></i></a>
