@@ -41,7 +41,7 @@ class StudentController extends Controller
                 $rules = array(
                     'faculty_id' => ['required', 'max:255'],
                     'department_id' => ['required', 'max:255'],
-                    'level' => ['required', 'max:255'],
+                    'level_id' => ['required', 'max:255'],
                     'matric_number' => ['required', 'max:255'],
                     'first_name' => ['required', 'max:255'],
                     'last_name' => ['required', 'max:255'],
@@ -49,7 +49,7 @@ class StudentController extends Controller
                 $fieldNames = array(
                     'faculty_id'   => 'Student Faculty',
                     'department_id' => 'Student Department',
-                    'level'   => 'Student Level',
+                    'level_id'   => 'Student Level',
                     'matric_number' => 'Student Matric Number',
                     'first_name'   => 'Student First Name',
                     'last_name' => 'Student Last Name',

@@ -84,13 +84,13 @@
 																				<div class="form-group row mb-4">
 																						<label class="col-sm-2 col-form-label">Select Level</label>
 																						<div class="col-sm-10">
-																							<select class="form-control level-option-field" id="level" name="level">
+																							<select class="form-control level-option-field" id="level" name="level_id">
 																								<option value="">Open this select menu</option>
 																								@foreach ($levels as $level)
 																								<option class="text-capitalize" @isset($course) {{ $course->level == $level->level ? "selected" : "" }} @else {{ old('level') == $level->level ? "selected" : "" }} @endisset  @isset($course) value="{{ $course->level }}" @else value="{{$level->level}}" @endisset >{{$level->name}}</option>                                                
 																								@endforeach
 																							</select>
-																							@error('level')
+																							@error('level_id')
 																								<span class="invalid-feedback mb-2" role="alert" style="display: block">
 																									<strong>{{ $message }}</strong>
 																								</span>
@@ -209,13 +209,13 @@
 																				<div class="form-group row mb-4">
 																						<label class="col-sm-2 col-form-label">Select Level</label>
 																						<div class="col-sm-10">
-																							<select class="form-control level-option-field" id="level" name="level">
+																							<select class="form-control level-option-field" id="level" name="level_id">
 																								<option value="">Open this select menu</option>
 																								@foreach ($levels as $level)
 																								<option class="text-capitalize" @isset($course) {{ $course->level == $level->level ? "selected" : "" }} @else {{ old('level') == $level->level ? "selected" : "" }} @endisset  @isset($course) value="{{ $course->level }}" @else value="{{$level->level}}" @endisset >{{$level->name}}</option>                                                
 																								@endforeach
 																							</select>
-																							@error('level')
+																							@error('level_id')
 																								<span class="invalid-feedback mb-2" role="alert" style="display: block">
 																									<strong>{{ $message }}</strong>
 																								</span>
