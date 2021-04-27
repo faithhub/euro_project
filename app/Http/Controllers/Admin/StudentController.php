@@ -99,7 +99,7 @@ class StudentController extends Controller
             $data['sn'] = 1;
             $data['mode'] = 'create';
             $data['classes'] = Classes::all()->groupBy('class_id');
-            return view('admin.students.create-bulk', $data);
+            return view('admin.students.create', $data);
         }
     }
 
