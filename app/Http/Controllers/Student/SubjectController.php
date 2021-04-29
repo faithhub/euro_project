@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assignment;
 use App\Models\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -30,13 +31,7 @@ class SubjectController extends Controller
         $data['title'] = 'Assignments';
         $data['sn'] = 1;
         $data['class'] = Classes::where('class_id', Auth::user()->class_id)->first();
-        $data['subjects'] = $subjects = DB::table('users')
-            ->join('results', 'results.student_id', '=', 'users.email')
-            ->join('subjects', 'subjects.id', '=', 'results.subject_id')
-            ->where('users.email', Auth::user()->email)
-            ->where('results.student_id', Auth::user()->email)
-            ->select('results.*', 'users.*', 'subjects.*')
-            ->get();
+        $data['assignments'] = Assignment::where('user_id', Auth::user()->id)->with('faculty:id,name,code')->with('dept:id,name')->with('level:id,name')->with('semester:id,name')->with('course:id,course_title,course_code')->get();
         return view('student.assignment.index', $data);
     }
 
@@ -63,7 +58,7 @@ class SubjectController extends Controller
             $rules = array(
                 'semester_id' => ['required', 'max:255'],
                 'course_id' => ['required', 'max:255'],
-                'assignment' => ['required', 'mimes:jpg,jpeg,png.xlsx.xls.csv.txt.pdf', 'max:10000']
+                'assignment' => ['required', 'mimes:jpg,jpeg,png,xlsx,xls,docx,csv,txt,doc,pdf', 'max:10000']
             );
             $fieldNames = array(
                 'semester_id' => 'Semester',
@@ -78,24 +73,23 @@ class SubjectController extends Controller
                 return back()->withErrors($validator)->withInput();
             } else {
                 //dd($request->all());
-                if ($request->file('avatar')) {
-                    $file = $request->file('avatar');
-                    $picture = 'SPP' . date('dMY') . time() . '.' . $file->getClientOriginalExtension();
-                    $pictureDestination = 'uploads/student_avatar';
+                if ($request->file('assignment')) {
+                    $file = $request->file('assignment');
+                    $picture = 'Assignment' . Auth::user()->matric_number . date('dMY') . time() . '.' . $file->getClientOriginalExtension();
+                    $pictureDestination = 'uploads/student_assignment';
                     $file->move($pictureDestination, $picture);
                 }
-                // $user = User::find(Auth::user()->id);
-                // $user->first_name = $request->first_name;
-                // $user->email = $request->email;
-                // $user->last_name = $request->last_name;
-                // $user->mobile = $request->mobile;
-                // $user->address = $request->address;
-                // $user->city = $request->city;
-                // $user->state = $request->state;
-                // $user->avatar = $request->hasFile('avatar') ? $picture : $user->avatar;
-                // $user->save();
+                $user = new Assignment();
+                $user->user_id = Auth::user()->id;
+                $user->faculty_id = Auth::user()->faculty_id;
+                $user->dept_id = Auth::user()->dept_id;
+                $user->level_id = Auth::user()->level_id;
+                $user->semester_id = $request->semester_id;
+                $user->course_id = $request->course_id;
+                $user->assignment = $request->hasFile('assignment') ? $picture : $user->assignment;
+                $user->save();
                 Session::flash('success', 'Assignment Submitted Successfully');
-                return \back();
+                return redirect('student/assignments');
             }
         } else {
             $data['title'] = 'Submit Assignment';

@@ -13,6 +13,14 @@
 				</ul>
 			</div>	
 			<div class="row">
+                <div class="text-center">                    
+                    @if (session('success'))
+                    <div class="alert alert-success font-weight-700">
+                        {{ session('success') }}
+                        <a href="#" style="float:right;" class="alert-close" data-dismiss="alert">&times;</a>
+                    </div>
+                @endif
+                </div>
 				<!-- Your Profile Views Chart -->
 				<div class="col-lg-12 m-b30">
 					<div class="widget-box">
@@ -30,25 +38,24 @@
                                     <thead style="font-weight:bolder">
                                         <tr>                                            
                                             <td>S/N</td>
-                                            <td>Subject</td>
-                                            <td>First Test</td>
-                                            <td>Second Test</td>
-                                            <td>Exam</td>
-                                            <td>Total</td>
-                                            {{-- <td>Action</td> --}}
+                                            <td>Course</td>
+                                            <td>Semester</td>
+                                            <td>Assignment</td>
+                                            <td>Date submitted</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($subjects as $subject)                                            
-                                            <tr>        
-                                                <td>{{$sn++}}</td>                                    
-                                                <td><b>{{$subject->name}}</b></td>
-                                                <td>{{$subject->first_test ?? '0'}}</td>
-                                                <td>{{$subject->second_test ?? '0'}}</td>
-                                                <td>{{$subject->exam ?? '0'}}</td>
-                                                <td>{{$subject->first_test + $subject->second_test + $subject->exam ?? '0'}}</td>
-                                            </tr>
-                                        @endforeach
+                                        @isset($assignments)                                            
+                                            @foreach ($assignments as $assignment)                                            
+                                                <tr>        
+                                                    <td>{{$sn++}}</td>                                    
+                                                    <td><b>{{$assignment->course->course_title}} ({{ $assignment->course->course_code }})</b></td>
+                                                    <td><b>{{$assignment->semester->name ?? '0'}}</b></td>
+                                                    <td><a href="{{ asset('uploads/student_assignment/'.$assignment->assignment) }}" target="_blank" class="btn btn-sm btn-success">View</a></td>
+                                                    <td>{{ date('D, M j, Y', strtotime($assignment->created_at))}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endisset
                                     </tbody>
                                 </table>                                   
 							</div>

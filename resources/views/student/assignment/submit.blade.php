@@ -109,7 +109,7 @@
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label">Assignment</label>
 										<div class="col-sm-7">
-											<input type="file" name="assignment" accept=".xlsx,.xls,image/*,.txt,.pdf">
+											<input type="file" name="assignment" accept=".xlsx,.xls,image/*,.txt,.pdf,.docx,.doc">
 											{{-- <input type="file" name="assignment" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf"> --}}
 											@error('assignment')
 													<span class="invalid-feedback mb-2" role="alert" style="display: block">
