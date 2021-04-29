@@ -39,28 +39,34 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="row">
                           @isset($courses)                            
-                            <table class="table">
-                              <thead>
-                                <tr>
-                                  <td>S/N</td>
-                                  <td>Course Title</td>
-                                  <td>Course Code</td>
-                                  <td>Lecturer Incharge</td>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                @isset($courses)
-                                  @foreach ($courses as $course)
-                                    <tr>
-                                      <td>{{ $sn++ }}</td>
-                                      <td>{{ $course->course_title }}</td>
-                                      <td>{{ $course->course_code }}</td>
-                                      <td>{{ $course->course_code }}</td>
-                                    </tr>
-                                  @endforeach
-                                @endisset
-                              </tbody>
-                            </table>
+                            @if($courses->count() > 0)
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <td>S/N</td>
+                                    <td>Course Title</td>
+                                    <td>Course Code</td>
+                                    <td>Action</td>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @isset($courses)
+                                    @foreach ($courses as $course)
+                                      <tr>
+                                        <td>{{ $sn++ }}</td>
+                                        <td>{{ $course->course_title }}</td>
+                                        <td>{{ $course->course_code }}</td>
+                                        <td>
+                                          <a href="{{ url('student/submit-assignment') }}" class="btn btn-success">Submit Assignment</a>
+                                        </td>
+                                      </tr>
+                                    @endforeach
+                                  @endisset
+                                </tbody>
+                              </table>
+                            @else 
+                            <h2>No Courses For Department of {{$department->faculty->name}} {{$level->name}} yet</h2>                             
+                            @endif
                             @else
                             <div class="text-center">
                               <h2>No Courses Created Yet</h2>
