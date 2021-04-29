@@ -19,7 +19,7 @@ class CreateCoursesTable extends Migration
             $table->integer('department_id')->nullable();
             $table->integer('level');
             $table->integer('semester');
-            $table->integer('lecturer_id');
+            $table->integer('lecturer_id')->nullable();
             $table->string('course_title');
             $table->string('course_code');
             $table->timestamps();

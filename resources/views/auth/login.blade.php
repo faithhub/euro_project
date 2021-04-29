@@ -69,7 +69,7 @@
 						<div class="col-lg-12">
 							<div class="form-group">
 								<div class="input-group">
-									<label>Your Unique ID</label>
+									<label>Your Unique ID / Matric Number</label>
                                     <input id="email" type="" class="form-control @error('matric_number') is-invalid @enderror" name="matric_number" value="{{ old('matric_number') }}">
                                     @error('matric_number')
                                         <span class="invalid-feedback" role="alert">
