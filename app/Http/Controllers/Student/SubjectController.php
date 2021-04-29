@@ -15,7 +15,9 @@ use App\Models\Department;
 use App\Models\Faculties;
 use App\Models\Level;
 use App\Models\Semester;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class SubjectController extends Controller
@@ -109,6 +111,22 @@ class SubjectController extends Controller
             return $courses;
         } catch (\Throwable $th) {
             return false;
+        }
+    }
+
+    public function delete_assignment($id)
+    {
+        try {
+            $delete = Assignment::where(['user_id' => Auth::user()->id, 'id' => $id])->first();
+            if (File::exists(public_path('uploads/student_assignment/'.$delete->assignment))) {
+                File::delete(public_path('uploads/student_assignment/'.$delete->assignment));
+            }
+            Session::flash('success', "Assignment Deleted Successfully");
+            $delete->delete();
+            return back();
+        } catch (\Throwable $th) {
+            Session::flash('error', "Assignment not Delete");
+            return back();
         }
     }
 }

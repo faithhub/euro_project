@@ -42,6 +42,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'active', 'student
 
   //Assignment
   Route::get('assignments', [\App\Http\Controllers\Student\SubjectController::class, 'index']);
+  Route::get('delete-assignment/{id}', [\App\Http\Controllers\Student\SubjectController::class, 'delete_assignment']);
   Route::match(['get', 'post'], '/submit-assignment', [\App\Http\Controllers\Student\SubjectController::class, 'submit'])->name('submit_assgnment');
   Route::post('/fetch-course', [\App\Http\Controllers\Student\SubjectController::class, 'course']);
   Route::get('download-result', [\App\Http\Controllers\Student\SubjectController::class, 'download_pdf']);

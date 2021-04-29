@@ -42,6 +42,7 @@
                                             <td>Semester</td>
                                             <td>Assignment</td>
                                             <td>Date submitted</td>
+                                            <td>Action</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,6 +54,7 @@
                                                     <td><b>{{$assignment->semester->name ?? '0'}}</b></td>
                                                     <td><a href="{{ asset('uploads/student_assignment/'.$assignment->assignment) }}" target="_blank" class="btn btn-sm btn-success">View</a></td>
                                                     <td>{{ date('D, M j, Y', strtotime($assignment->created_at))}}</td>
+                                                    <td><a href="{{ url('student/delete-assignment', $assignment->id) }}" onclick="return confirm('Are you sure you want to delete this Assignment?')" class="btn btn-sm btn-danger" >Delete</a></td>
                                                 </tr>
                                             @endforeach
                                         @endisset
