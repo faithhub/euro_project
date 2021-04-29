@@ -40,9 +40,10 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'active', 'student
   Route::match(['get', 'post'], '/profile', [\App\Http\Controllers\Student\SettingsController::class, 'index'])->name('student_profile');
   Route::post('/change-password', [\App\Http\Controllers\Student\ChangePasswordController::class, 'change'])->name('change-password');
 
-  //Subject
+  //Assignment
   Route::get('assignments', [\App\Http\Controllers\Student\SubjectController::class, 'index']);
   Route::match(['get', 'post'], '/submit-assignment', [\App\Http\Controllers\Student\SubjectController::class, 'submit'])->name('submit_assgnment');
+  Route::post('/fetch-course', [\App\Http\Controllers\Student\SubjectController::class, 'course']);
   Route::get('download-result', [\App\Http\Controllers\Student\SubjectController::class, 'download_pdf']);
 });
 

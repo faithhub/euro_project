@@ -55,6 +55,9 @@
 <script src="{{ asset('dashboard/assets/vendors/calendar/moment.min.js') }}"></script>
 <script src="{{ asset('dashboard/assets/vendors/calendar/fullcalendar.js') }}"></script>
 <script src="{{ asset('dashboard/assets/vendors/switcher/switcher.js') }}"></script>
+<script src="{{ asset('dashboard/assets/vendors/file-upload/imageuploadify.min.js') }}"></script>
+<script src="{{ asset('dashboard/assets/vendors/file-upload/imageuploadify.min.js') }}"></script>
+
 <script>
   $(document).ready(function() {
 

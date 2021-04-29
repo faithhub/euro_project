@@ -19,7 +19,7 @@
 							<h4>Submit Assignment</h4>
 						</div>
 						<div class="widget-inner">
-							<form class="edit-profile m-b30" method="POST" action="{{ route('student_profile') }}" enctype="multipart/form-data">
+							<form class="edit-profile m-b30" method="POST" action="{{ route('submit_assgnment') }}" enctype="multipart/form-data">
 								@csrf
 								<div class="">
 									<div class="form-group row">
@@ -55,7 +55,7 @@
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label">Level</label>
 										<div class="col-sm-7">
-                      <select class="form-control" name="level_id">
+                      <select disabled class="form-control" name="level_id">
                         @isset($levels)
                           @foreach ($levels as $level)
                             <option value="{{ $level->id }}" {{Auth::user()->level_id == $level->id ? "selected" : ''}}>{{ $level->name }}</option>                            
@@ -72,7 +72,7 @@
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label">Semester</label>
 										<div class="col-sm-7">
-                      <select class="form-control" name="semester_id">
+                      <select class="form-control" name="semester_id" id="semester_id" onchange="getCourse(this)">
                         @isset($semesters)
                           @foreach ($semesters as $semester)
                             <option value="{{ $semester->id }}" {{Auth::user()->semester_id == $semester->id ? "selected" : ''}}>{{ $semester->name }}</option>                            
@@ -89,14 +89,29 @@
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label">Course</label>
 										<div class="col-sm-7">
-                      <select class="form-control" name="course_id">
-                        @isset($courses)
+                      <select class="form-control" name="course_id" id="course_id">
+                        {{-- @isset($courses)
                           @foreach ($courses as $course)
                             <option value="{{ $course->id }}">{{ $course->course_title }} ({{ $course->course_code }})</option>                            
                           @endforeach                          
-                        @endisset
+                        @endisset --}}
                       </select>
+											<span class="invalid-feedback mb-2" role="alert" style="display: block">
+													<strong id="course_error"></strong>
+											</span>
 											@error('course_id')
+													<span class="invalid-feedback mb-2" role="alert" style="display: block">
+															<strong>{{ $message }}</strong>
+													</span>
+											@enderror
+										</div>
+									</div>									
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label">Assignment</label>
+										<div class="col-sm-7">
+											<input type="file" name="assignment" accept=".xlsx,.xls,image/*,.txt,.pdf">
+											{{-- <input type="file" name="assignment" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf"> --}}
+											@error('assignment')
 													<span class="invalid-feedback mb-2" role="alert" style="display: block">
 															<strong>{{ $message }}</strong>
 													</span>
@@ -124,4 +139,52 @@
 			</div>
 		</div>
 	</main>
+	<script>
+		$(function () {
+		var semester_id = $('#semester_id :selected').val();
+		var semester_text = $('#semester_id :selected').text();
+			$.ajax({
+            type: "POST",
+            url: "{{ url('student/fetch-course') }}",
+            data: {"_token": "{{ csrf_token() }}","semester_id":semester_id},
+            success: function (response) {  
+                console.log(response)
+                if(response != ""){
+									$("#course_error").text('');
+                  $("#course_id").attr('disabled', false);
+                  $("#course_id").find('option').remove();
+                  $.each(response, function(key, value)
+                  {
+                      $("#course_id").append('<option class="text-capitalize" value=' + value.id + '>' + value.course_title + ' ('+value.course_code+')</option>');
+                  });
+                }else{
+									$("#course_error").text('No Course yet for the '+semester_text)
+									console.log('Null')
+								}
+            }
+        });
+		});
+		 function getCourse(sel)
+        {
+            //alert(sel.value);
+            $.ajax({
+            type: "POST",
+            url: "{{ url('student/fetch-course') }}",
+            data: {"_token": "{{ csrf_token() }}","semester_id":sel.value},
+            success: function (response) {
+                if(response != ""){
+									$("#course_error").text('');
+                  $("#course_id").attr('disabled', false);
+                  $("#course_id").find('option').remove();
+                  $.each(response, function(key, value)
+                  {
+                      $("#course_id").append('<option class="text-capitalize" value=' + value.id + '>' + value.course_title + ' ('+value.course_code+')</option>');
+                  });
+                }else{
+									$("#course_error").text('No Course yet for the selected semester')
+								}
+            }
+        });
+        }
+	</script>
 @endsection

@@ -14,6 +14,9 @@ use App\Models\Department;
 use App\Models\Faculties;
 use App\Models\Level;
 use App\Models\Semester;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+
 class SubjectController extends Controller
 {
     public function __construct()
@@ -58,24 +61,14 @@ class SubjectController extends Controller
     {
         if ($_POST) {
             $rules = array(
-                'email' => ['required', 'email', 'max:255', 'unique:users,email,'.Auth::user()->id],
-                'first_name' => ['required', 'max:255'],
-                'last_name' => ['required', 'max:255'],
-                'mobile' => ['max:255'],
-                'address' => ['max:255'],
-                'city' => ['max:255'],
-                'state' => ['max:255'],
-                'avatar' => 'image|mimes:jpg,jpeg,png|max:5000',
+                'semester_id' => ['required', 'max:255'],
+                'course_id' => ['required', 'max:255'],
+                'assignment' => ['required', 'mimes:jpg,jpeg,png.xlsx.xls.csv.txt.pdf', 'max:10000']
             );
             $fieldNames = array(
-                'email' => 'Email',
-                'first_name'     => 'First Name',
-                'last_name'     => 'Last Name',
-                'mobile'   => 'Mobile Number',
-                'city'  => 'City',
-                'state'  => 'State',
-                'address'  => 'Address',
-                'avatar'   => 'Profile Picture',
+                'semester_id' => 'Semester',
+                'course_id'     => 'Course',
+                'assignment'     => 'Assignment',
             );
             //dd($request->all());
             $validator = Validator::make($request->all(), $rules);
@@ -91,17 +84,17 @@ class SubjectController extends Controller
                     $pictureDestination = 'uploads/student_avatar';
                     $file->move($pictureDestination, $picture);
                 }
-                $user = User::find(Auth::user()->id);
-                $user->first_name = $request->first_name;
-                $user->email = $request->email;
-                $user->last_name = $request->last_name;
-                $user->mobile = $request->mobile;
-                $user->address = $request->address;
-                $user->city = $request->city;
-                $user->state = $request->state;
-                $user->avatar = $request->hasFile('avatar') ? $picture : $user->avatar;
-                $user->save();
-                Session::flash('success', 'Profile Updated Successfully');
+                // $user = User::find(Auth::user()->id);
+                // $user->first_name = $request->first_name;
+                // $user->email = $request->email;
+                // $user->last_name = $request->last_name;
+                // $user->mobile = $request->mobile;
+                // $user->address = $request->address;
+                // $user->city = $request->city;
+                // $user->state = $request->state;
+                // $user->avatar = $request->hasFile('avatar') ? $picture : $user->avatar;
+                // $user->save();
+                Session::flash('success', 'Assignment Submitted Successfully');
                 return \back();
             }
         } else {
@@ -110,8 +103,18 @@ class SubjectController extends Controller
             $data['departments'] = Department::orderBy('name', 'ASC')->get();
             $data['levels'] = Level::orderBy('id', 'ASC')->get();
             $data['semesters'] = Semester::orderBy('id', 'ASC')->get();
-            $data['courses'] = $f = Course::where(['faculty_id' => Auth::user()->faculty_id, 'department_id' => Auth::user()->dept_id])->with('faculty:id,name,code')->with('dept:id,name')->with('level_get:id,name')->with('semester_get:id,name')->orderBy('id', 'ASC')->get();
+            $data['courses'] = $f = Course::where(['faculty_id' => Auth::user()->faculty_id, 'department_id' => Auth::user()->dept_id, 'level' => Auth::user()->level_id])->with('faculty:id,name,code')->with('dept:id,name')->with('level_get:id,name')->with('semester_get:id,name')->orderBy('id', 'ASC')->get();
             return view('student.assignment.submit', $data);
+        }
+    }
+
+    public function course(Request $request)
+    {
+        try {
+            $courses = Course::where(['faculty_id' => Auth::user()->faculty_id, 'department_id' => Auth::user()->dept_id, 'level' => Auth::user()->level_id, 'semester' => $request->semester_id])->orderBy('id', 'ASC')->get();
+            return $courses;
+        } catch (\Throwable $th) {
+            return false;
         }
     }
 }

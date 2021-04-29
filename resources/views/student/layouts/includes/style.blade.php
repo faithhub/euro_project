@@ -38,4 +38,5 @@
 	<!-- STYLESHEETS ============================================= -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/assets/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/assets/css/dashboard.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('dashboard/assets/vendors/file-upload/imageuploadify.min.css') }}">
 	<link class="skin" rel="stylesheet" type="text/css" href="{{ asset('dashboard/assets/css/color/color-1.css') }}">
