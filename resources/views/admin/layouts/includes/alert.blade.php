@@ -53,5 +53,7 @@
 		toastr.success("{{ session('status') }}", "Success");
 	@elseif(Session::has('permission_warning'))
 		toastr.warning("{{ session('permission_warning') }}", "Warning!");
+	@elseif(Session::has('block'))
+		toastr.error("{{ session('block') }}", "Warning!");
 	@endif
   </script>

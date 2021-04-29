@@ -39,7 +39,7 @@
 <script src="{{ asset('dashboard/assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('dashboard/assets/vendors/bootstrap/js/popper.min.js') }}"></script>
 <script src="{{ asset('dashboard/assets/vendors/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('dashboard/assets/vendors/bootstrap-select/bootstrap-select.min.js') }}"></script>
+{{-- <script src="{{ asset('dashboard/assets/vendors/bootstrap-select/bootstrap-select.min.js') }}"></script> --}}
 <script src="{{ asset('dashboard/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js') }}"></script>
 <script src="{{ asset('dashboard/assets/vendors/magnific-popup/magnific-popup.js') }}"></script>
 <script src="{{ asset('dashboard/assets/vendors/counter/waypoints-min.js') }}"></script>

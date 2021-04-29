@@ -50,4 +50,14 @@ class ChangePasswordController extends Controller
             }
         }
     }
+    
+    public function index()
+    {
+        try {
+            $data['title'] = 'Change Password';
+            return view('admin.settings.change_password', $data);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

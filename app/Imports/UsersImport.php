@@ -20,7 +20,8 @@ class UsersImport implements ToModel, WithHeadingRow
         $id = mt_rand(1000, 9999);
         //dd($data);
         return new User([
-            'email' => $data['matric_number'],
+            'email' => $data['email'],
+            'matric_number' => $data['matric_number'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'faculty_id' => Session::get('bulk_faculty_id'),

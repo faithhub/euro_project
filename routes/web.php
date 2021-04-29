@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+// Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -32,15 +33,16 @@ Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq']);
 
 
 // Students
-Route::group(['prefix' => 'student', 'middleware' => ['auth', 'student']], function () {
+Route::group(['prefix' => 'student', 'middleware' => ['auth', 'active', 'student']], function () {
   Route::get('/', [\App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student');
 
   //Settings
   Route::match(['get', 'post'], '/profile', [\App\Http\Controllers\Student\SettingsController::class, 'index'])->name('student_profile');
-  Route::post('/change-password', [\App\Http\Controllers\Student\ChangePasswordController::class, 'change']);
+  Route::post('/change-password', [\App\Http\Controllers\Student\ChangePasswordController::class, 'change'])->name('change-password');
 
   //Subject
-  Route::get('subjects', [\App\Http\Controllers\Student\SubjectController::class, 'index']);
+  Route::get('assignments', [\App\Http\Controllers\Student\SubjectController::class, 'index']);
+  Route::match(['get', 'post'], '/submit-assignment', [\App\Http\Controllers\Student\SubjectController::class, 'submit'])->name('submit_assgnment');
   Route::get('download-result', [\App\Http\Controllers\Student\SubjectController::class, 'download_pdf']);
 });
 
@@ -72,6 +74,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
   //Settings
   Route::match(['get', 'post'], '/profile', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('admin_profile');
   Route::post('/change-password', [\App\Http\Controllers\Admin\ChangePasswordController::class, 'change']);
+  Route::get('/change-password', [\App\Http\Controllers\Admin\ChangePasswordController::class, 'index']);
 
   //Faculties
   Route::match(['get', 'post'], '/faculties', [App\Http\Controllers\Admin\FacultyController::class, 'create'])->name('admin_create_faculty');
@@ -97,12 +100,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
   Route::get('/view-course/{faculty_id}/{dept_id}/{level_id}/{semester_id}/{course_id}', [App\Http\Controllers\Admin\CoursesController::class, 'view']);
   Route::get('/delete-course/{id}', [App\Http\Controllers\Admin\CoursesController::class, 'delete']);
 
-  //Teacher
-  Route::match(['get', 'post'], '/teachers', [App\Http\Controllers\Admin\TeacherController::class, 'create'])->name('admin_create_teacher');
-  Route::get('/edit-teacher/{id}', [App\Http\Controllers\Admin\TeacherController::class, 'edit']);
-  Route::get('/delete-teacher/{id}', [App\Http\Controllers\Admin\TeacherController::class, 'delete']);
-  Route::get('/block-teacher/{id}', [App\Http\Controllers\Admin\TeacherController::class, 'block']);
-  Route::get('/unblock-teacher/{id}', [App\Http\Controllers\Admin\TeacherController::class, 'unblock']);
+  //Lecturer
+  Route::get('lecturers', [App\Http\Controllers\Admin\LecturerController::class, 'index']);
+  Route::match(['get', 'post'], '/add-lecturer', [App\Http\Controllers\Admin\LecturerController::class, 'create'])->name('admin_create_lecturer');
+  Route::get('/view-lecturer/{id}', [App\Http\Controllers\Admin\LecturerController::class, 'view']);
+  Route::get('/edit-lecturer/{id}', [App\Http\Controllers\Admin\LecturerController::class, 'edit']);
+  Route::get('/delete-lecturer/{id}', [App\Http\Controllers\Admin\LecturerController::class, 'delete']);
+  Route::get('/block-lecturer/{id}', [App\Http\Controllers\Admin\LecturerController::class, 'block']);
+  Route::get('/unblock-lecturer/{id}', [App\Http\Controllers\Admin\LecturerController::class, 'unblock']);
+  Route::post('/fetch-course', [App\Http\Controllers\Admin\LecturerController::class, 'course']);
 
   //Student
   Route::get('students', [App\Http\Controllers\Admin\StudentController::class, 'index']);

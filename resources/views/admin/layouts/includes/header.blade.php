@@ -39,28 +39,28 @@
                                 </a>
                               </li>
                               <li class="mb-0">
-                                <a href="{{ url('admin/plans') }}" class="d-block">
-                                  <i class="la la-file-text-o"></i> Plans
+                                <a href="{{ url('admin/lecturers') }}" class="d-block">
+                                  <i class="la la-user"></i> Lecturers
                                 </a>
                               </li>
                               <li class="mb-0">
-                                <a href="{{ url('admin/all-job') }}" class="d-block">
-                                  <i class="la la-briefcase"></i> All Job
+                                <a href="{{ url('admin/students') }}" class="d-block">
+                                  <i class="la la-users"></i> Student
                                 </a>
                               </li>
                               <li class="mb-0">
-                                <a href="{{ url('admin/change-password') }}" class="d-block">
-                                  <i class="la la-lock"></i> Change Password
+                                <a href="{{ url('admin/faculties') }}" class="d-block">
+                                  <i class="la la-book"></i>Faculty
                                 </a>
                               </li>
                               <li class="mb-0">
-                                <a href="{{ url('admin/withdrawals') }}" class="d-block">
-                                  <i class="la la-money-bill"></i> Withdrawals
+                                <a href="{{ url('admin/departments') }}" class="d-block">
+                                  <i class="la la-book"></i> Department
                                 </a>
                               </li>
                               <li class="mb-0">
-                                <a href="{{ url('admin/transactions') }}" class="d-block">
-                                  <i class="la la-money"></i> Transactions
+                                <a href="{{ url('admin/courses') }}" class="d-block">
+                                  <i class="la la-book"></i> Courses
                                 </a>
                               </li>
                               <li class="mb-0">

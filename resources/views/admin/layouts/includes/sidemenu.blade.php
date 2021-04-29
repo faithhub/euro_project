@@ -14,11 +14,11 @@
                     <li class="{{ request()->is('admin')  ? 'page-active' : '' }}" ><a href="{{ url('admin') }}"><i class="la la-dashboard icon-element"></i> Dashboard</a></li>
 
 
-                    <li class="{{ request()->is('admin/add-job-category*') || request()->is('admin/job-category*')  ? 'page-active' : '' }}">
+                    <li class="{{ request()->is('admin/lecturers*') || request()->is('admin/add-lecturer*') || request()->is('admin/edit-lecturer*') || request()->is('admin/view-lecturer*')  ? 'page-active' : '' }}">
                         <a href="#"><i class="la la-user icon-element"></i> Lecturers <span class="la la-caret-down btn-toggle"></span></a>
                         <ul class="dropdown-menu-item">
-                            <li><a href="{{ url('admin/job-categories') }}"> All Lecturers</a></li>
-                            <li><a href="{{ url('admin/add-job-category') }}"> Add New Lecturer</a></li>
+                            <li><a href="{{ url('admin/lecturers') }}"> All Lecturers</a></li>
+                            <li><a href="{{ url('admin/add-lecturer') }}"> Add New Lecturer</a></li>
                         </ul>
                     </li>
 

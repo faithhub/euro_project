@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
+        'matric_number',
         'email',
         'faculty_id',
         'dept_id',
@@ -60,13 +61,32 @@ class User extends Authenticatable
         $save->save();
         return $save;
     }
+    public function create_lecturer($data)
+    {
+        $id = mt_rand(1000, 9999);
+        $pass = strtolower($data['first_name']);
+        $save = new self;
+        $save->email = $data['email'];
+        $save->matric_number = $data['lecturer_id'];
+        $save->first_name = $data['first_name'];
+        $save->last_name = $data['last_name'];
+        $save->faculty_id = $data['faculty_id'];
+        $save->dept_id = $data['department_id'];
+        $save->level_id = $data['level_id'];
+        $save->course_id = $data['course_id'];
+        $save->semester_id = $data['semester_id'];
+        $save->role = 'Lecturer';
+        $save->password = Hash::make($pass);
+        $save->save();
+    }
 
     public function create_student($data)
     {
         $id = mt_rand(1000, 9999);
         $pass = strtolower($data['first_name']);
         $save = new self;
-        $save->email = $data['matric_number'];
+        $save->email = $data['email'];
+        $save->matric_number = $data['matric_number'];
         $save->first_name = $data['first_name'];
         $save->last_name = $data['last_name'];
         $save->faculty_id = $data['faculty_id'];
@@ -88,5 +108,9 @@ class User extends Authenticatable
     public function dept()
     {
         return $this->belongsTo(Department::class, 'dept_id');
+    }
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
     }
 }

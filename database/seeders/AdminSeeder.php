@@ -20,6 +20,7 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             'first_name' => 'Admin',
             'last_name' => 'Admin',
+            'matric_number' => 'Admin',
             'email' => 'Admin',
             'password' => Hash::make('Admin@123'),
             'role' => 'Admin',

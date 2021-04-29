@@ -52,7 +52,9 @@
                     <i class="la la-book"></i>
                 </div><!-- end icon-element-->
                 <div class="info-content">
-                    <span class="info__count"></span>
+                    <span class="info__count">
+                        {{$faculty}}
+                    </span>
                     <h4 class="info__title font-size-16 mt-2">Faculty</h4>
                 </div><!-- end info-content -->
             </div>
@@ -65,7 +67,9 @@
                     <i class="la la-book"></i>
                 </div><!-- end icon-element-->
                 <div class="info-content">
-                    <span class="info__count"></span>
+                    <span class="info__count">
+                        {{$departments}}
+                    </span>
                     <h4 class="info__title font-size-16 mt-2">Departments</h4>
                 </div><!-- end info-content -->
             </div>
@@ -78,7 +82,9 @@
                     <i class="la la-book"></i>
                 </div><!-- end icon-element-->
                 <div class="info-content">
-                    <span class="info__count"></span>
+                    <span class="info__count">
+                        {{$course}}
+                    </span>                        
                     <h4 class="info__title font-size-16 mt-2">Courses</h4>
                 </div><!-- end info-content -->
             </div>

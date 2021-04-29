@@ -104,8 +104,19 @@
 																				<div class="form-group row mb-4">
 																						<label class="col-sm-2 col-form-label">Matric No.</label>
 																						<div class="col-sm-10">
-																							<input class="form-control @error('matric_number') is-invalid @enderror" name="matric_number" type="text" @isset($student) value="{{ $student->email }}" @else value="{{ old('matric_number') }}" @endisset placeholder="Student Matic Number">
+																							<input class="form-control @error('matric_number') is-invalid @enderror" name="matric_number" type="text" @isset($student) value="{{ $student->matric_number }}" @else value="{{ old('matric_number') }}" @endisset placeholder="Student Matic Number">
 																							@error('matric_number')
+																								<span class="invalid-feedback mb-2" role="alert" style="display: block">
+																									<strong>{{ $message }}</strong>
+																								</span>
+																							@enderror
+																						</div>
+																				</div>	
+																				<div class="form-group row mb-4">
+																						<label class="col-sm-2 col-form-label">Email</label>
+																						<div class="col-sm-10">
+																							<input class="form-control @error('email') is-invalid @enderror" name="email" type="email" @isset($student) value="{{ $student->email }}" @else value="{{ old('email') }}" @endisset placeholder="Student Email">
+																							@error('email')
 																								<span class="invalid-feedback mb-2" role="alert" style="display: block">
 																									<strong>{{ $message }}</strong>
 																								</span>

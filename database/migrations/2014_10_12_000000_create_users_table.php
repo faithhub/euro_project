@@ -23,9 +23,11 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('mobile')->nullable();
             $table->integer('level_id')->nullable();
+            $table->integer('course_id')->nullable();
+            $table->integer('semester_id')->nullable();
             $table->integer('faculty_id')->nullable();
             $table->integer('dept_id')->nullable();
-            $table->enum('role', ['Admin', 'Teacher', 'Student'])->default('Student');
+            $table->enum('role', ['Admin', 'Lecturer', 'Student'])->default('Student');
             $table->enum('status', ['Active', 'Blocked'])->default('Active');
             $table->string('address')->nullable();
             $table->string('city')->nullable();

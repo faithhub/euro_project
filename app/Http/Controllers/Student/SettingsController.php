@@ -21,7 +21,8 @@ class SettingsController extends Controller
     {
         if ($_POST) {
             $rules = array(
-                'surname' => ['required', 'max:255'],
+                'email' => ['required', 'email', 'max:255', 'unique:users,email,'.Auth::user()->id],
+                'first_name' => ['required', 'max:255'],
                 'last_name' => ['required', 'max:255'],
                 'mobile' => ['max:255'],
                 'address' => ['max:255'],
@@ -30,7 +31,8 @@ class SettingsController extends Controller
                 'avatar' => 'image|mimes:jpg,jpeg,png|max:5000',
             );
             $fieldNames = array(
-                'surname'     => 'Surname',
+                'email' => 'Email',
+                'first_name'     => 'First Name',
                 'last_name'     => 'Last Name',
                 'mobile'   => 'Mobile Number',
                 'city'  => 'City',
@@ -53,7 +55,8 @@ class SettingsController extends Controller
                     $file->move($pictureDestination, $picture);
                 }
                 $user = User::find(Auth::user()->id);
-                $user->surname = $request->surname;
+                $user->first_name = $request->first_name;
+                $user->email = $request->email;
                 $user->last_name = $request->last_name;
                 $user->mobile = $request->mobile;
                 $user->address = $request->address;

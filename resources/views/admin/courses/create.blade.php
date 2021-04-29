@@ -139,7 +139,7 @@ input:checked + .slider:before {
                                     <select id="department" name="department_id" id="department" class="form-control department-option-field">
                                       <option value="">Open this select menu</option>
                                       @foreach ($departments as $department)
-                                      <option class="text-capitalize" @isset($course) {{ $course->faculty_id == $faculty->id ? "selected" : "" }} @else {{ old('department_id') == $department->id ? "selected" : "" }} @endisset value="{{$department->id}}">{{$department->name}}</option>                                                
+                                      <option class="text-capitalize" @isset($course) {{ $course->department_id == $department->id ? "selected" : "" }} @else {{ old('department_id') == $department->id ? "selected" : "" }} @endisset value="{{$department->id}}">{{$department->name}}</option>                                                
                                       @endforeach
                                     </select>
                                     @error('department_id')

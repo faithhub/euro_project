@@ -20,9 +20,9 @@
 		                </a>
 		            </li>
 					<li>
-						<a href="{{ url('student/subjects') }}" class="ttr-material-button">
+						<a href="{{ url('student/assignments') }}" class="ttr-material-button">
 							<span class="ttr-icon"><i class="ti-book"></i></span>
-		                	<span class="ttr-label">Subjects</span>
+		                	<span class="ttr-label">Assignments</span>
 		                </a>
 		            </li>
 					<li>

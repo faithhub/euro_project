@@ -42,7 +42,8 @@ class StudentController extends Controller
                     'faculty_id' => ['required', 'max:255'],
                     'department_id' => ['required', 'max:255'],
                     'level_id' => ['required', 'max:255'],
-                    'matric_number' => ['required', 'max:255', 'unique:users,email,' . $request->id],
+                    'matric_number' => ['required', 'max:255', 'unique:users,matric_number,' . $request->id],
+                    'email' => ['required', 'max:255', 'unique:users,email,' . $request->id],
                     'first_name' => ['required', 'max:255'],
                     'last_name' => ['required', 'max:255'],
                 );
@@ -53,6 +54,7 @@ class StudentController extends Controller
                     'matric_number' => 'Student Matric Number',
                     'first_name'   => 'Student First Name',
                     'last_name' => 'Student Last Name',
+                    'email' => 'Student Email',
                 );
                 //dd($request->all());
                 $validator = Validator::make($request->all(), $rules);
@@ -63,14 +65,15 @@ class StudentController extends Controller
                 } else {
                     try {
                         $user = User::find($request->id);
-                        $user->email = $request->matric_number;
+                        $user->email = $request->email;
+                        $user->matric_number = $request->matric_number;
                         $user->first_name = $request->first_name;
                         $user->last_name = $request->last_name;
                         $user->faculty_id = $request->faculty_id;
                         $user->dept_id = $request->department_id;
                         $user->level_id = $request->level_id;
                         $user->save();
-                        $this->check_student();
+                        // $this->check_student();
                         Session::flash('success', 'Student Updated Successfully');
                         return redirect('admin/students');
                     } catch (\Throwable $th) {
@@ -83,9 +86,10 @@ class StudentController extends Controller
                     'faculty_id' => ['required', 'max:255'],
                     'department_id' => ['required', 'max:255'],
                     'level_id' => ['required', 'max:255'],
-                    'matric_number' => ['required', 'max:255', 'unique:users,email'],
+                    'matric_number' => ['required', 'max:255', 'unique:users,matric_number'],
                     'first_name' => ['required', 'max:255'],
                     'last_name' => ['required', 'max:255'],
+                    'email' => ['required', 'max:255', 'email', 'unique:users,email'],
                 );
                 $fieldNames = array(
                     'faculty_id'   => 'Student Faculty',
@@ -94,6 +98,7 @@ class StudentController extends Controller
                     'matric_number' => 'Student Matric Number',
                     'first_name'   => 'Student First Name',
                     'last_name' => 'Student Last Name',
+                    'email' => 'Student Email'
                 );
                 //dd($request->all());
                 $validator = Validator::make($request->all(), $rules);
@@ -104,7 +109,7 @@ class StudentController extends Controller
                 } else {
                     try {
                         $this->create_new->create_student($request);
-                        $this->check_student();
+                        // $this->check_student();
                         Session::flash('success', 'Student Created Successfully');
                         return redirect('admin/students');
                     } catch (\Throwable $th) {
@@ -180,13 +185,13 @@ class StudentController extends Controller
             return \back();
         }
     }
-    
+
 
     public function view($id)
     {
         try {
             $data['student'] = $u = User::where(['id' => $id, 'role' => 'Student'])->with('faculty:id,name')->with('dept:id,name')->with('level:id,name')->first();
-            $data['title'] = $u->first_name.' '.$u->last_name;
+            $data['title'] = $u->first_name . ' ' . $u->last_name;
             return view('admin.students.view', $data);
         } catch (\Throwable $th) {
             Session::flash('error', $th->getMessage());

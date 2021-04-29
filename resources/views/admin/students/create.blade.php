@@ -110,6 +110,17 @@
 																						</div>
 																				</div>	
 																				<div class="form-group row mb-4">
+																						<label class="col-sm-2 col-form-label">Email</label>
+																						<div class="col-sm-10">
+																							<input class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{ old('email') }}" placeholder="Student Email">
+																							@error('email')
+																								<span class="invalid-feedback mb-2" role="alert" style="display: block">
+																									<strong>{{ $message }}</strong>
+																								</span>
+																							@enderror
+																						</div>
+																				</div>
+																				<div class="form-group row mb-4">
 																						<label class="col-sm-2 col-form-label">First Name</label>
 																						<div class="col-sm-10">
 																							<input class="form-control @error('first_name') is-invalid @enderror" name="first_name" type="text" value="{{ old('first_name') }}" placeholder="Student First Name">
@@ -238,7 +249,7 @@
 																					<div class="col-sm-12  ml-auto">
 																							<h6>Note: First Name is password by default in lowercase<br>
 																									Note: The Excel Sheet format must match below sample<br><br>
-																									<img src="{{ asset('uploads/upload_format.jpg') }}">
+																									<img src="{{ asset('uploads/upload_format.jpg') }}" class="img-fluid">
 																							</h6>
 																					</div>
 																				</div>	

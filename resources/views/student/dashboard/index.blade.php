@@ -16,7 +16,7 @@
 				<div class="col-lg-12 m-b30">
 					<div class="widget-box">
 						<div class="wc-title">
-							<h4>Welcome {{Auth::user()->surname}} {{Auth::user()->last_name}}</h4>
+							<h4>Welcome {{Auth::user()->first_name}} {{Auth::user()->last_name}}</h4>
 						</div>
 						<div class="widget-inner">
 							<div class="card-courses-list bookmarks-bx">
@@ -28,29 +28,55 @@
 									@endif
 								</div>
 								<div class="card-courses-full-dec">
-									<div class="card-courses-title">
-										<h2 class="m-b5">{{Auth::user()->surname}} {{Auth::user()->last_name}}</h2>
+									<div class="card-courses-list-bx">
+										<ul class="card-courses-view">
+											<li class="card-courses-categories">
+												<h4>Matric Number:</h4>
+												<h3>{{Auth::user()->matric_number}}</h3>
+											</li>
+										</ul>
 									</div>
 									<div class="card-courses-list-bx">
 										<ul class="card-courses-view">
 											<li class="card-courses-categories">
-												<h4>class</h4>
-												<h3>{{$class->name}}</h3>
+												<h4>Name:</h4>
+												<h3>{{Auth::user()->first_name}} {{ Auth::user()->last_name }}</h3>
 											</li>
+										</ul>
+									</div>									
+									<div class="card-courses-list-bx">
+										<ul class="card-courses-view">
 											<li class="card-courses-categories">
-												<h4>Student ID</h4>
+												<h4>Email:</h4>
 												<h3>{{Auth::user()->email}}</h3>
+											</li>
+										</ul>
+									</div>								
+									<div class="card-courses-list-bx">
+										<ul class="card-courses-view">
+											<li class="card-courses-categories">
+												<h4>Faculty:</h4>
+												<h3>{{$student->faculty->name}}</h3>
+											</li>
+										</ul>
+									</div>
+									<div class="card-courses-list-bx">
+										<ul class="card-courses-view">
+											<li class="card-courses-categories">
+												<h4>Department:</h4>
+												<h3>{{$student->dept->name}}</h3>
+											</li>
+										</ul>
+									</div>
+									<div class="card-courses-list-bx">
+										<ul class="card-courses-view">
+											<li class="card-courses-categories">
+												<h4>Level:</h4>
+												<h3>{{$student->level->name}}</h3>
 											</li>
 										</ul>
 									</div>
 									<div class="row card-courses-dec">
-										<div class="col-md-12">
-											<p>
-												@foreach ($subjects as $subject)
-													{{$subject->name}}
-												@endforeach
-											</p>	
-										</div>
 										<div class="col-md-12">
 											<a href="{{ url('student/profile') }}" class="btn radius-xl">Edit Profile</a>
 										</div>

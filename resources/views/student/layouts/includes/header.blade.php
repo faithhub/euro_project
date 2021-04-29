@@ -41,7 +41,7 @@
 						<div class="ttr-header-submenu">
 							<ul>
 								<li><a href="{{ url('student/profile') }}">My profile</a></li>
-								<li><a href="{{ url('student/subjects') }}">My Subjects</a></li>
+								<li><a href="{{ url('student/assignments') }}">Assignments</a></li>
 								<li><a href="{{ url('logout') }}">Logout</a></li>
 							</ul>
 						</div>

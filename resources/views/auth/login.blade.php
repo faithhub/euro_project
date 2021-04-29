@@ -29,7 +29,7 @@
 	
 	<!-- MOBILE SPECIFIC ============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    @include('web.layouts.includes.alert')
+	@include('admin.layouts.includes.alert')
 	<!--[if lt IE 9]>
 	<script src="assets/js/html5shiv.min.js"></script>
 	<script src="assets/js/respond.min.js"></script>
@@ -38,6 +38,7 @@
 	<!-- All PLUGINS CSS ============================================= -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('web/assets/css/assets.css') }}">
 	
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 	<!-- TYPOGRAPHY ============================================= -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('web/assets/css/typography.css') }}">
 	
@@ -69,8 +70,13 @@
 							<div class="form-group">
 								<div class="input-group">
 									<label>Your Unique ID</label>
-                                    <input id="email" type="" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
-                                    @error('email')
+                                    <input id="email" type="" class="form-control @error('matric_number') is-invalid @enderror" name="matric_number" value="{{ old('matric_number') }}">
+                                    @error('matric_number')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+																		@error('active')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

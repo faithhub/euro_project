@@ -6,10 +6,10 @@
 	<main class="ttr-wrapper">
 		<div class="container-fluid">
 			<div class="db-breadcrumb">
-				<h4 class="breadcrumb-title">My Subjeects</h4>
+				<h4 class="breadcrumb-title">Assignments</h4>
 				<ul class="db-breadcrumb-list">
 					<li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-					<li>My Subjeects</li>
+					<li>Assignments</li>
 				</ul>
 			</div>	
 			<div class="row">
@@ -17,8 +17,12 @@
 				<div class="col-lg-12 m-b30">
 					<div class="widget-box">
 						<div class="wc-title">
-							<h2>All Subjects For {{$class->name}} Class</h2>
+							<h2>All My Submitted Assignments</h2>
 						</div>
+                        <div class="text-right mt-2">
+                            <a href="{{ url('student/submit-assignment') }}" class="btn btn-small btn-success mr-2">Submit Assignment</a>
+                            {{-- <button class="btn green" data-bs-toggle="modal" data-bs-target="#uploadStudentResultInBulk">Upload Result in Bulk</button> --}}
+                        </div> 
 						
 						<div class="widget-inner">
 							<div class="orders-list">
@@ -46,11 +50,7 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                </table>
-                                <div class="text-right mt-2">
-                                    <a href="{{ url('student/download-result') }}" class="btn btn-small btn-success mr-2">Download Result</a>
-                                    {{-- <button class="btn green" data-bs-toggle="modal" data-bs-target="#uploadStudentResultInBulk">Upload Result in Bulk</button> --}}
-                                </div>                                    
+                                </table>                                   
 							</div>
 						</div>
 					</div>
