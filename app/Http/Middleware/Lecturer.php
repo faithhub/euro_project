@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class Student
+class Lecturer
 {
     /**
      * Handle an incoming request.
@@ -18,11 +18,10 @@ class Student
      */
     public function handle(Request $request, Closure $next)
     {
-        //dd(Auth::user());
-        if (Auth::user()->role == 'Student') {
+        if (Auth::user()->role == 'Lecturer') {
             return $next($request);
-        } elseif (Auth::user()->role == 'Lecturer') {
-            return redirect('/lecturer');
+        } elseif (Auth::user()->role == 'Student') {
+            return redirect('/student');
         } elseif (Auth::user()->role == 'Admin') {
             return redirect('/admin');
         } else {

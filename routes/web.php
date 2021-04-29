@@ -45,28 +45,19 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'active', 'student
   Route::get('delete-assignment/{id}', [\App\Http\Controllers\Student\SubjectController::class, 'delete_assignment']);
   Route::match(['get', 'post'], '/submit-assignment', [\App\Http\Controllers\Student\SubjectController::class, 'submit'])->name('submit_assgnment');
   Route::post('/fetch-course', [\App\Http\Controllers\Student\SubjectController::class, 'course']);
-  Route::get('download-result', [\App\Http\Controllers\Student\SubjectController::class, 'download_pdf']);
 });
 
-// Teachers
-Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'teacher']], function () {
-  Route::get('/', [\App\Http\Controllers\Teacher\DashboardController::class, 'index'])->name('teacher');
+// Lecturer
+Route::group(['prefix' => 'lecturer', 'middleware' => ['auth', 'active', 'lecturer']], function () {
+  Route::get('/', [\App\Http\Controllers\Lecturer\DashboardController::class, 'index'])->name('lecturer');
 
-  //Class
-  Route::get('class', [\App\Http\Controllers\Teacher\ClassController::class, 'index']);
-  Route::get('view-class/{id}', [\App\Http\Controllers\Teacher\ClassController::class, 'view']);
-  Route::post('edit-class', [\App\Http\Controllers\Teacher\ClassController::class, 'edit'])->name('edit-result');
-  Route::get('export-data/{id}', [\App\Http\Controllers\Teacher\ClassController::class, 'exportdata']);
-  Route::get('export-data-pdf/{id}', [\App\Http\Controllers\Teacher\ClassController::class, 'exportdatapdf']);
-  Route::get('download-result-pdf/{id}', [\App\Http\Controllers\Teacher\ClassController::class, 'download_pdf']);
-  Route::post('import-data/', [\App\Http\Controllers\Teacher\ClassController::class, 'importresult'])->name('student-upload-result');
-
-  //Student
-  Route::get('students', [\App\Http\Controllers\Teacher\StudentController::class, 'index']);
+  //Assignments
+  Route::get('assignments', [\App\Http\Controllers\Lecturer\SubjectController::class, 'index']);
+  Route::get('delete-assignment/{id}', [\App\Http\Controllers\Lecturer\SubjectController::class, 'delete_assignment']);
 
   //Settings
-  Route::match(['get', 'post'], '/profile', [\App\Http\Controllers\Teacher\SettingsController::class, 'index'])->name('teacher_profile');
-  Route::post('/change-password', [\App\Http\Controllers\Teacher\ChangePasswordController::class, 'change']);
+  Route::match(['get', 'post'], '/profile', [\App\Http\Controllers\Lecturer\SettingsController::class, 'index'])->name('lecturer_profile');
+  Route::post('/change-password', [\App\Http\Controllers\Lecturer\ChangePasswordController::class, 'change'])->name('lecturer-change-password');
 });
 
 //Admin

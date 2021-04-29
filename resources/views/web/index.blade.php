@@ -112,7 +112,7 @@
     <div class="content-block">
         
         <!-- Our Services -->
-        <div class="section-area content-inner service-info-bx">
+        <div class="section-area content-inner service-info-bx mb-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-6">
@@ -163,7 +163,7 @@
         <!-- Our Services END -->
         
         <!-- Popular Courses -->
-        <div class="section-area section-sp2 popular-courses-bx">
+        {{-- <div class="section-area section-sp2 popular-courses-bx">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 heading-bx left">
@@ -172,6 +172,22 @@
                 </div>
                 <div class="row">
                 <div class="courses-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+                    @isset($faculties)
+                        @foreach ($faculties as $faculty)                            
+                            <div class="item">
+                                <div class="cours-bx">
+                                    <div class="action-box">
+                                        <img src="{{ asset('web/assets/images/faculties/saat.jpg') }}" alt="">
+                                        <a href="#" class="btn">View</a>
+                                    </div>
+                                    <div class="info-bx text-center">
+                                        <h5><b><a href="#">School of Agriculture and Agricultural Technology</a></b></h5>
+                                        <h3>(SAAT)</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach                        
+                    @endisset
                     <div class="item">
                         <div class="cours-bx">
                             <div class="action-box">
@@ -247,7 +263,7 @@
                 </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Popular Courses END -->
         
     </div>
