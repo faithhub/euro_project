@@ -14,7 +14,7 @@
 <script src="{{ asset('web/assets/vendors/owl-carousel/owl.carousel.js') }}"></script>
 <script src="{{ asset('web/assets/js/functions.js') }}"></script>
 <script src="{{ asset('web/assets/js/contact.js') }}"></script>
-<script src='{{ asset('web/assets/vendors/switcher/switcher.js') }}'></script>
+{{-- <script src='{{ asset('web/assets/vendors/switcher/switcher.js') }}'></script> --}}
 <!-- Revolution JavaScripts Files -->
 <script src="{{ asset('web/assets/vendors/revolution/js/jquery.themepunch.tools.min.js') }}"></script>
 <script src="{{ asset('web/assets/vendors/revolution/js/jquery.themepunch.revolution.min.js') }}"></script>

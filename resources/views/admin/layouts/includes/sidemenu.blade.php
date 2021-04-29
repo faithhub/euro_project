@@ -54,14 +54,8 @@
                             <li><a href="{{ url('admin/create-course') }}"> Add New Course</a></li>
                         </ul>
                     </li>
-
-                    <li class="{{ request()->is('admin/add-job-category*') || request()->is('admin/job-category*')  ? 'page-active' : '' }}">
-                        <a href="#"><i class="la la-book icon-element"></i> Assignments <span class="la la-caret-down btn-toggle"></span></a>
-                        <ul class="dropdown-menu-item">
-                            <li><a href="{{ url('admin/job-categories') }}"> All Assignments</a></li>
-                            <li><a href="{{ url('admin/add-job-category') }}"> Add New Assignment</a></li>
-                        </ul>
-                    </li>
+                    
+                    <li class="{{ request()->is('admin/assignments*') ? 'page-active' : '' }}"><a href="{{ url('admin/assignments') }}"><i class="la la-book icon-element"></i> Assignments</a></li>
 
                     <li class="{{ request()->is('admin/profile*') || request()->is('admin/change-password*')  ? 'page-active' : '' }}">
                         <a href="#"><i class="la la-gear icon-element"></i> Settings <span class="la la-caret-down btn-toggle"></span></a>

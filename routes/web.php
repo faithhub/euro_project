@@ -68,6 +68,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
   Route::match(['get', 'post'], '/profile', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('admin_profile');
   Route::post('/change-password', [\App\Http\Controllers\Admin\ChangePasswordController::class, 'change']);
   Route::get('/change-password', [\App\Http\Controllers\Admin\ChangePasswordController::class, 'index']);
+  Route::get('/assignments', [\App\Http\Controllers\Admin\SettingController::class, 'assignment']);
+  Route::get('delete-assignment/{id}', [\App\Http\Controllers\Admin\SettingController::class, 'delete_assignment']);
 
   //Faculties
   Route::match(['get', 'post'], '/faculties', [App\Http\Controllers\Admin\FacultyController::class, 'create'])->name('admin_create_faculty');
