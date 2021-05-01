@@ -65,12 +65,8 @@
                                 </tbody>
                               </table>
                             @else 
-                            <h2 class="ml-3 mr-3">No Courses For Department of {{$department->faculty->name}} {{$level->name}} yet</h2>                             
+                            <h2 class="ml-3 mr-3">No Course available yet For Department of {{$department->faculty->name}} {{$level->name}}</h2>                             
                             @endif
-                            @else
-                            <div class="text-center">
-                              <h2>No Courses Created Yet</h2>
-                            </div>
                           @endisset
                         </div>
                     </div>
