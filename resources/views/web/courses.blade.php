@@ -65,7 +65,7 @@
                                 </tbody>
                               </table>
                             @else 
-                            <h2>No Courses For Department of {{$department->faculty->name}} {{$level->name}} yet</h2>                             
+                            <h2 class="m-2">No Courses For Department of {{$department->faculty->name}} {{$level->name}} yet</h2>                             
                             @endif
                             @else
                             <div class="text-center">
