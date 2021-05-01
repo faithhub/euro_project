@@ -8,7 +8,7 @@
             </div><!-- end section-heading -->
             <ul class="list-items d-flex align-items-center">
                 <li class="active__list-item"><a href="#">Home</a></li>
-                <li class="active__list-item">Employers</li>
+                <li class="active__list-item">Admin</li>
                 <li>Dashboard</li>
             </ul>
         </div><!-- end breadcrumb-content -->
