@@ -4,12 +4,15 @@
 <!-- Mirrored from techydevs.com/demos/themes/html/zobstar/employer-dashboard.html by HTTrack userssite Copier/3.x [XR&CO'2014], Thu, 22 Oct 2020 09:20:23 GMT -->
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="author" content="TechyDevs">
+    <meta name="author" content="Ehruoghene">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Incare - {{ $title  ?? '' }}</title>
+    <title>My Project - {{ $title  ?? '' }}</title>
     <!-- Favicon -->
-    <link rel="icon" href="images/favicon.png">
+    
+	<!-- FAVICONS ICON ============================================= -->
+	<link rel="icon" href="{{ asset('web/assets/images/favicon.ico') }}" type="image/x-icon" />
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('web/assets/images/favicon.png') }}" />
 
     <!-- Google Fonts -->
      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,300,400,500,700,900&amp;display=swap" rel="stylesheet">
