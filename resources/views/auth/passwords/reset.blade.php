@@ -12,11 +12,11 @@
 	<meta name="robots" content="" />
 	
 	<!-- DESCRIPTION -->
-	<meta name="description" content="Project : ENHANCING EDUCATIONAL TECHNOLOGY VIA DIGITAL PLATFORMS BY DEVELOPING AN ONLINE SUBMISSION SOFTWARE" />
+	<meta name="description" content="Project : ENHANCING EDUCATIONAL TECHNOLOGY VIA DIGITAL PLATFORMS BY DEVELOPING AN ONLINE ASSIGNMENT SUBMISSION SOFTWARE" />
 	
 	<!-- OG -->
-	<meta property="og:title" content="Project : ENHANCING EDUCATIONAL TECHNOLOGY VIA DIGITAL PLATFORMS BY DEVELOPING AN ONLINE SUBMISSION SOFTWARE" />
-	<meta property="og:description" content="Project : ENHANCING EDUCATIONAL TECHNOLOGY VIA DIGITAL PLATFORMS BY DEVELOPING AN ONLINE SUBMISSION SOFTWARE" />
+	<meta property="og:title" content="Project : ENHANCING EDUCATIONAL TECHNOLOGY VIA DIGITAL PLATFORMS BY DEVELOPING AN ONLINE ASSIGNMENT SUBMISSION SOFTWARE" />
+	<meta property="og:description" content="Project : ENHANCING EDUCATIONAL TECHNOLOGY VIA DIGITAL PLATFORMS BY DEVELOPING AN ONLINE ASSIGNMENT SUBMISSION SOFTWARE" />
 	<meta property="og:image" content="" />
     <meta name="format-detection" content="telephone=no">
     
@@ -29,7 +29,7 @@
 	
 	
 	<!-- PAGE TITLE HERE ============================================= -->
-    <title>Project : ENHANCING EDUCATIONAL TECHNOLOGY VIA DIGITAL PLATFORMS BY DEVELOPING AN ONLINE SUBMISSION SOFTWARE </title>
+    <title>Project : ENHANCING EDUCATIONAL TECHNOLOGY VIA DIGITAL PLATFORMS BY DEVELOPING AN ONLINE ASSIGNMENT SUBMISSION SOFTWARE </title>
 	
 	<!-- MOBILE SPECIFIC ============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">

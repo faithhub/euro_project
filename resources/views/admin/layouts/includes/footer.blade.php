@@ -2,7 +2,7 @@
 	<div class="col-lg-12">
 		<div class="copy-right margin-top-40px padding-top-20px padding-bottom-20px">
 			<p class="copy__desc">
-				Copyright &copy; <span id="year"></span> ENHANCING EDUCATIONAL TECHNOLOGY VIA DIGITAL PLATFORMS BY DEVELOPING AN ONLINE SUBMISSION SOFTWARE
+				Copyright &copy; <span id="year"></span> ENHANCING EDUCATIONAL TECHNOLOGY VIA DIGITAL PLATFORMS BY DEVELOPING AN ONLINE ASSIGNMENT SUBMISSION SOFTWARE
 				<span class="la la-heart-o"></span><a target="_blank" href="https://amaofaith.com"> FaithHub</a>
 			</p>
 			<ul class="list-items">
