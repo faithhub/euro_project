@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assignment;
 use App\Models\Classes;
 use App\Models\Course;
 use App\Models\Department;
@@ -29,6 +30,7 @@ class DashboardController extends Controller
         $data['course'] = Course::count();
         $data['departments'] = Department::count();
         $data['faculty'] = Faculties::count();
+        $data['assignment'] = Assignment::count();
         return view('admin.dashboard.index', $data);
     }
 }

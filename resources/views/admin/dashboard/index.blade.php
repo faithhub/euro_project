@@ -97,7 +97,9 @@
                     <i class="la la-book"></i>
                 </div><!-- end icon-element-->
                 <div class="info-content">
-                    <span class="info__count"></span>
+                    <span class="info__count">
+                        {{$assignment}}
+                    </span>
                     <h4 class="info__title font-size-16 mt-2">Assignments</h4>
                 </div><!-- end info-content -->
             </div>
