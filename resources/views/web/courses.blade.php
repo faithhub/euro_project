@@ -65,7 +65,7 @@
                                 </tbody>
                               </table>
                             @else 
-                            <h5 class="ml-3 mr-3">No Courses available yet For Department of {{$department->name}} - {{$level->name}} under Faculty of {{$department->faculty->name}}  ({{$department->faculty->code}})</h4>                             
+                            <h5 class="ml-3 mr-3">No Courses available yet For Department of {{$department->name}} - {{$level->name}} under Faculty of {{$department->faculty->name}}  ({{$department->faculty->code}})</h5>                             
                             @endif
                           @endisset
                         </div>

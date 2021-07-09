@@ -53,13 +53,12 @@ class LoginController extends Controller
             if (Auth::user()->status == "Active") {
                 $request->session()->regenerate();
                 return redirect()->guest(route('login'));
-            }else{
+            } else {
                 Session::flash('warning', 'Your has been blocked');
                 Auth::logout();
                 return back()->withInput($request->all())->withErrors([
                     'matric_number' => 'Access denied! Your account has been blocked.'
                 ]);
-
             }
         }
         Session::flash('error', 'The provided credentials do not match our records');
